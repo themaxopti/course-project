@@ -1,0 +1,81 @@
+.discount-header {
+  height: 38px;
+  font-size: 14px;
+  color: white;
+  font-family: "Rubik";
+  background-color: black;
+
+  @media (max-width: 400px) {
+    font-size: 12px;
+  }
+
+  &__cross {
+    margin-left: auto;
+    cursor: pointer;
+    @media (max-width: 400px) {
+      display: none;
+    }
+  }
+
+  &__text {
+    margin-left: auto;
+    @media (max-width: 400px) {
+      margin-left: 0;
+    }
+  }
+
+  .container {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  span {
+    cursor: pointer;
+    font-weight: 500;
+    text-decoration: underline;
+  }
+}
+
+.header {
+  font-family: "Poppins";
+
+  &__burger {
+    display: none;
+    cursor: pointer;
+    @media (max-width: 400px) {
+      display: block;
+    }
+  }
+
+  &__logo {
+    display: flex;
+    column-gap: 16px;
+
+    div {
+      cursor: pointer;
+    }
+
+
+  }
+
+  &__icons {
+    display: flex;
+    column-gap: 14px;
+    img {
+      cursor: pointer;
+    }
+  }
+
+  .container {
+    @media (max-width: 400px) {
+      height: 66px;
+    }
+    border-bottom: 1px solid #e5e5e5;
+    height: 96px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}

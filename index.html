@@ -1,13 +1,92 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + TS</title>
-  </head>
-  <body>
-    <div  id="root"></div>
-    <script type="module" src="/src/main.ts"></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vite + TS</title>
+</head>
+
+<body>
+  <div id="root">
+    <div class="wrapper discount-header">
+      <div class="container">
+        <div class="discount-header__text">Sign up and get 20% off to your first order. <span> Sign Up Now </span>
+        </div>
+        <div class="discount-header__cross"><img src="./src/assets/Vector.svg" alt=""></div>
+      </div>
+    </div>
+    <header class="wrapper header">
+      <div class="container">
+        <div class="header__logo">
+          <img class="header__burger" src="./src/assets/header/burger.svg" alt="">
+          <div class="logo-text">SHOP.CO</div>
+        </div>
+        <div class="header__icons">
+          <img src="./src/assets/header/basket.svg" alt="">
+          <img src="./src/assets/header/profile.svg" alt="">
+        </div>
+      </div>
+    </header>
+
+    <footer class="wrapper footer">
+      <div class="container">
+          <div class="footer__black-box"></div>
+          <div class="footer__content">
+            <div class="footer__content__main">
+              <div class="logo-text">SHOP.CO</div>
+              <p>We have clothes that suits your style and which you’re proud to wear. From women to men.</p>
+              <div class="footer__socials">
+                <img src="./src/assets/footer/twitter.svg" alt="">
+                <img src="./src/assets/footer/facebook.svg" alt="">
+                <img src="./src/assets/footer/instagram.svg" alt="">
+                <img src="./src/assets/footer/github.svg" alt="">
+              </div>
+            </div>
+            <div class="footer__content__block">
+              <div class="title">Company</div>
+              <div class="links">
+                <p>About</p>
+                <p>Features</p>
+                <p>Works</p>
+                <p>Career</p>
+              </div>
+            </div>
+            <div class="footer__content__block">
+              <div class="title">Help</div>
+              <div class="links">
+                <p>Customer Support</p>
+                <p>Delivery Details</p>
+                <p>Terms & Conditions</p>
+                <p>Privacy Policy</p>
+              </div>
+            </div>
+            <div class="footer__content__block">
+              <div class="title">FAQ</div>
+              <div class="links">
+                <p>Account</p>
+                <p>Manage Deliveries</p>
+                <p>Orders</p>
+                <p>Payments</p>
+              </div>
+            </div>
+            <div class="footer__content__block">
+              <div class="title">Resources</div>
+              <div class="links">
+                <p>Free eBooks</p>
+                <p>Development Tutorial</p>
+                <p>How to - Blog</p>
+                <p>Youtube Playlist</p>
+              </div>
+            </div>
+          </div>
+          <div class="pay"></div>
+      </div>
+    </footer>
+
+  </div>
+  <script type="module" src="/src/main.ts"></script>
+</body>
+
 </html>
