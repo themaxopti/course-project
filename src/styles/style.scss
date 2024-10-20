@@ -8,9 +8,25 @@
   box-sizing: border-box;
 }
 
+html {
+  height: 100%;
+  // display: flex;
+  // flex-direction: column;
+}
+
 body {
+  // display: flex;
+  // flex-direction: column;
   margin: 0;
   padding: 0;
+  height: 100%;
+}
+
+
+#root {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .wrapper {
@@ -34,4 +50,8 @@ body {
   @media (max-width: 400px) {
     font-size: 25px;
   }
+}
+
+.title {
+  color: blue;
 }

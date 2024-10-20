@@ -6,5 +6,5 @@ function bootstrap() {
   router.resolve()
 }
 
-// bootstrap()
+bootstrap()
 

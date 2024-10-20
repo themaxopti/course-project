@@ -7,7 +7,9 @@ export class TestPage {
 
   render() {
     const page = createDiv(`
+      <div style="margin-bottom:200px">
         <a href="/" data-navigo>Navigate to main</a>
+      </div>
     `);
 
     return page;

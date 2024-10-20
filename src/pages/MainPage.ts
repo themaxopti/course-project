@@ -1,23 +1,24 @@
-import { CounterComponent } from "../components/Counter";
-import { createDiv } from "../helpers/createHtmlTags";
+import { Footer } from "../components/Footer";
+import { Header } from "../components/Header";
+import { TestPage } from "./TestPage";
+
+
 
 export class MainPage {
-  element: HTMLDivElement | null = null;
-  children: [CounterComponent];
+  element: DocumentFragment | null = null;
+  children: [Header,TestPage,Footer];
 
   constructor() {
-    this.children = [new CounterComponent()];
+    this.children = [new Header(),new TestPage(),new Footer()];
   }
 
   render() {
-    const page = createDiv(`
-        <a href="test" data-navigo>Test link</a>
-    `);
+    this.element = document.createDocumentFragment()
 
     this.children.forEach((child) => {
-      page.appendChild(child.render());
+      this.element!.appendChild(child.render());
     });
 
-    return page;
+    return this.element;
   }
 }
