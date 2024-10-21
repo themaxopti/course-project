@@ -44,6 +44,7 @@ export class Input {
   }
 
   setError(message: string) {
+    this.removeError();
     this.node.classList.add("login-input--error");
     this.errorNode = document.createElement("span");
     this.errorNode.classList.add("login-input__error-message");

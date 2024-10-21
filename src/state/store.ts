@@ -1,4 +1,3 @@
-// src/store/store.js
 import { createStore, combineReducers } from 'redux';
 import {counterReducer} from './reducers/counterReducer/counterReducer';
 import {userReducer} from './reducers/userReducer/userReducer';

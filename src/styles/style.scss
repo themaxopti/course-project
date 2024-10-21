@@ -9,10 +9,9 @@
 @import "../components/login/form/form.scss";
 @import "../pages/Login/login-page.scss";
 
-
-
 * {
   box-sizing: border-box;
+  font-family: 'Rubik', sans-serif;
 }
 
 html {
@@ -22,9 +21,10 @@ html {
 body {
   margin: 0;
   padding: 0;
-  height: 100%;
+  position: relative;
+  height: 100vh;
+  overflow-x: hidden;
 }
-
 
 #root {
   height: 100%;
@@ -33,7 +33,7 @@ body {
 }
 
 .wrapper {
-  width: 100%;
+  width: 100dvw;
 }
 
 .container {

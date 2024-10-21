@@ -1,6 +1,10 @@
 import { FormOptionsModel } from "./FormOptions.model.ts";
 import { Input } from "../input/Input.ts";
 import { InputEnum } from "../input/InputEnum.ts";
+import { store } from "../../../state/store.ts";
+import { setUser } from "../../../state/actions/user/userActions.ts";
+import axios from "axios";
+import { router } from "../../../router/router.ts";
 
 export class Form {
   private readonly node: HTMLFormElement;
@@ -33,17 +37,51 @@ export class Form {
           valid = false;
         }
         if (field.node.value === "") {
-          field.setError("Field cannot be empty");
+          this.setFormError("All fields are required.");
           valid = false;
         }
       });
 
       if (valid) {
-        console.log("submitting");
+        this.removeFormError();
+        this.sendForm();
       } else {
         console.log("not submitting");
       }
     });
+  }
+
+  setFormError(message: string = 'Something went wrong. Try again.') {
+    this.removeFormError();
+    const errorNode = document.createElement("span");
+    errorNode.classList.add("login-form__error-message");
+    errorNode.textContent = message;
+    this.node.append(errorNode);
+  }
+
+  removeFormError() {
+    const errorNode = this.node.querySelector(".login-form__error-message");
+    if (errorNode) {
+      errorNode.remove();
+    }
+  }
+
+  sendForm() {
+    axios.post('https://dummyjson.com/auth/login', {
+      username: this.fields[0].node.value,
+      password: this.fields[1].node.value,
+    })
+      .then(response => {
+        const data = response.data;
+        localStorage.setItem('accessToken', data.accessToken);
+        localStorage.setItem('refreshToken', data.refreshToken);
+        store.dispatch(setUser(data));
+        router.navigate('/');
+      })
+      .catch(error => {
+        console.log(error.response.data.message);
+        this.setFormError(error.response.data.message);
+      });
   }
 
   render() {

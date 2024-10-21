@@ -1,24 +1,14 @@
-import { Footer } from "../components/Footer";
-import { Header } from "../components/Header";
 import { TestPage } from "./TestPage";
+import { PageBaseClass } from "./PageBaseClass.ts";
 
 
-
-export class MainPage {
-  element: DocumentFragment | null = null;
-  children: [Header,TestPage,Footer];
-
+export class MainPage extends PageBaseClass {
   constructor() {
-    this.children = [new Header(),new TestPage(),new Footer()];
+    super(new TestPage().render())
   }
 
   render() {
-    this.element = document.createDocumentFragment()
-
-    this.children.forEach((child) => {
-      this.element!.appendChild(child.render());
-    });
-
-    return this.element;
+    this.appendHeaderAndFooter();
+    return this.page;
   }
 }
