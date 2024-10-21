@@ -1,0 +1,75 @@
+.div-all-brands-line {
+  width: 100%;
+  background: #000000;
+  padding: 43px 0;
+
+  .div-brands-line-container {
+    max-width: 1240px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin: auto;
+  }
+}
+
+@media (max-width: 1300px) {
+  .div-all-brands-line {
+
+    .div-brands-line-container {
+      max-width: 1000px;
+    }
+  }
+}
+
+@media (max-width: 1150px) {
+  .div-all-brands-line {
+
+    .div-brands-line-container {
+      max-width: 900px;
+    }
+  }
+}
+
+
+@media (max-width: 930px) {
+  .div-all-brands-line {
+
+    .div-brands-line-container {
+      max-width: 600px;
+
+      .img-brand-versace {
+        height: 16px;
+      }
+
+      .img-brand-zara {
+        height: 27px;
+        margin-bottom: 20px;
+      }
+
+      .img-brand-gucci {
+        height: 26px;
+      }
+
+      .img-brand-prada {
+        height: 21px;
+      }
+
+      .img-brand-calvin-clein {
+        height: 15px;
+      }
+    }
+  }
+}
+
+@media (max-width: 650px) {
+  .div-all-brands-line {
+    padding: 39px 0;
+
+    .div-brands-line-container {
+      max-width: 390px;
+      padding: 0 16px;
+    }
+  }
+}
+
+
