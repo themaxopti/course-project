@@ -1,0 +1,86 @@
+.div-categories-all {
+  width: 100%;
+  background: #ffffff;
+  margin-bottom: 200px;
+
+  .h2-title-categories {
+    width: 100%;
+    font-size: 48px;
+    font-family: "Poppins", sans-serif;
+    text-align: center;
+    padding: 65px 0 48px 0;
+  }
+
+  .div-container-categories {
+    max-width: 1240px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin: auto;
+
+    .btn-card-category {
+      width: 295px;
+      height: 298px;
+      background: #F0EEED;
+      border: none;
+      border-radius: 20px;
+      font-size: 64px;
+      font-weight: 700;
+      white-space: normal;
+      word-wrap: break-word;
+      text-align: left;
+      margin-bottom: 23px;
+      padding: 5px;
+      
+      &:hover {
+        cursor: pointer;
+        background: #b5aeab;
+      }
+    }
+  }
+}
+
+@media (max-width: 1300px) {
+  .div-categories-all {
+  
+    .div-container-categories {
+      max-width: 1000px;
+    }
+  }
+}
+
+@media (max-width: 1150px) {
+  .div-categories-all {
+  
+    .div-container-categories {
+      max-width: 900px;
+    }
+  }
+}
+
+
+@media (max-width: 930px) {
+  .div-categories-all {
+  
+    .div-container-categories {
+      max-width: 600px;
+
+      .btn-card-category {
+        width: 159px;
+        height: 169px;
+        font-size: 32px;
+      }
+    }
+  }
+}
+
+@media (max-width: 650px) {
+  .div-categories-all {
+  
+    .div-container-categories {
+      max-width: 390px;
+      padding: 16px;
+    }
+  }
+}
+

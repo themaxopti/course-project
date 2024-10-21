@@ -16,8 +16,11 @@ export class CtaBanner {
     this.node.append(descriptionBanner);
 
     const btnBanner = createHTMLElement('button', ['btn-banner']);
-    btnBanner.textContent = BANNERINFO.button;
+    const linkBtn = createHTMLElement('a', ['a-link-anchor']);
+    linkBtn.setAttribute('href', '#targetBlock');
+    linkBtn.textContent = BANNERINFO.button;
     this.node.append(btnBanner);
+    btnBanner.append(linkBtn);
 
     const infoNumbersBlock = createHTMLElement('div', ['div-info-numbers-block']);
     this.node.append(infoNumbersBlock);
