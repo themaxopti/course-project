@@ -1,25 +1,20 @@
 import { BrandsLine } from "../components/brands-line/brands-line";
-import { Footer } from "../components/Footer";
-import { Header } from "../components/Header";
 import { MainBanner } from "../components/main-banner/main-banner";
 import { MainCategories } from "../components/main-categories/main-categories";
-import { createHTMLElement } from "../utils/create-html-element";
+import { PageBaseClass } from "./PageBaseClass.ts";
 
-export class MainPage {
-  private readonly page: HTMLElement;
-
-  element: HTMLElement | null = null;
-
+export class MainPage extends PageBaseClass {
   constructor() {
-    this.page = createHTMLElement('main', ['main-page']);
-    this.page.append(new Header().render());
-    this.page.append(new MainBanner().render());
-    this.page.append(new BrandsLine().render());
-    this.page.append(new MainCategories().render());
-    this.page.append(new Footer().render());
+    super([
+      new MainBanner().render(),
+      new BrandsLine().render(),
+      new MainCategories().render()
+    ]);
+    this.page.classList.add("main-page");
   }
 
   render() {
-    return this.page; 
+    this.appendHeaderAndFooter();
+    return this.page;
   }
 }

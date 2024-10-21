@@ -31,10 +31,11 @@
       text-align: left;
       margin-bottom: 23px;
       padding: 5px;
-      
+
       &:hover {
         cursor: pointer;
         background: #b5aeab;
+        transition: ease-in-out 0.3s;
       }
     }
   }
@@ -42,7 +43,7 @@
 
 @media (max-width: 1300px) {
   .div-categories-all {
-  
+
     .div-container-categories {
       max-width: 1000px;
     }
@@ -51,7 +52,7 @@
 
 @media (max-width: 1150px) {
   .div-categories-all {
-  
+
     .div-container-categories {
       max-width: 900px;
     }
@@ -61,7 +62,7 @@
 
 @media (max-width: 930px) {
   .div-categories-all {
-  
+
     .div-container-categories {
       max-width: 600px;
 
@@ -76,7 +77,7 @@
 
 @media (max-width: 650px) {
   .div-categories-all {
-  
+
     .div-container-categories {
       max-width: 390px;
       padding: 16px;

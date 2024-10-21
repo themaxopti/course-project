@@ -1,6 +1,7 @@
 import { FormOptionsModel } from "./FormOptions.model.ts";
 import { Input } from "../input/Input.ts";
 import { InputEnum } from "../input/InputEnum.ts";
+import { requestHandlers } from "../../../utils/requestHandlers.ts";
 
 export class Form {
   private readonly node: HTMLFormElement;
@@ -33,17 +34,41 @@ export class Form {
           valid = false;
         }
         if (field.node.value === "") {
-          field.setError("Field cannot be empty");
+          this.setFormError("All fields are required.");
           valid = false;
         }
       });
 
       if (valid) {
-        console.log("submitting");
+        this.removeFormError();
+        this.sendForm();
       } else {
         console.log("not submitting");
       }
     });
+  }
+
+  setFormError(message: string = 'Something went wrong. Try again.') {
+    this.removeFormError();
+    const errorNode = document.createElement("span");
+    errorNode.classList.add("login-form__error-message");
+    errorNode.textContent = message;
+    this.node.append(errorNode);
+  }
+
+  removeFormError() {
+    const errorNode = this.node.querySelector(".login-form__error-message");
+    if (errorNode) {
+      errorNode.remove();
+    }
+  }
+
+  sendForm() {
+    try {
+      requestHandlers.signIn(this.fields[0].node.value, this.fields[1].node.value);
+    } catch (error) {
+      this.setFormError(error.message);
+    }
   }
 
   render() {
