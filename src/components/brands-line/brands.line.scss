@@ -1,0 +1,21 @@
+.div-all-brands-line {
+  width: 100%;
+  background: #000000;
+  padding: 43px 0;
+
+  .div-brands-line-container {
+    max-width: 1240px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin: auto;
+  }
+
+  @media (max-width: 1300px){
+    .div-brands-line-container {
+      max-width: 1000px;
+    }
+  }
+}
+
+

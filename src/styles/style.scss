@@ -9,10 +9,15 @@
 @import "../components/login/form/form.scss";
 @import "../pages/Login/login-page.scss";
 
+@import "../components/main-banner/main-banner.scss";
+@import "../components//main-banner/cta-banner/cta-banner.scss";
+@import "../components/brands-line/brands.line.scss";
 
 
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 html {

@@ -1,24 +1,19 @@
-import { Footer } from "../components/Footer";
-import { Header } from "../components/Header";
-import { TestPage } from "./TestPage";
+import { BrandsLine } from "../components/brands-line/brands-line";
+import { MainBanner } from "../components/main-banner/main-banner";
+import { createHTMLElement } from "../utils/create-html-element";
 
 
 
 export class MainPage {
-  element: DocumentFragment | null = null;
-  children: [Header,TestPage,Footer];
+  private readonly page: HTMLElement;
 
   constructor() {
-    this.children = [new Header(),new TestPage(),new Footer()];
+    this.page = createHTMLElement('main', ['main-page']);
+    this.page.append(new MainBanner().render());
+    this.page.append(new BrandsLine().render());
   }
 
   render() {
-    this.element = document.createDocumentFragment()
-
-    this.children.forEach((child) => {
-      this.element!.appendChild(child.render());
-    });
-
-    return this.element;
+    return this.page; 
   }
 }
