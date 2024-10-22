@@ -1,6 +1,9 @@
 import { Form } from "../../components/login/form/Form.ts";
 import { FormOptionsModel } from "../../components/login/form/FormOptions.model.ts";
 import { InputEnum } from "../../components/login/input/InputEnum.ts";
+import { PageBaseClass } from "../PageBaseClass.ts";
+import { store } from "../../state/store.ts";
+import { router } from "../../router/router.ts";
 
 const formOptions: FormOptionsModel = {
   title: "Login",
@@ -23,16 +26,27 @@ const formOptions: FormOptionsModel = {
   submitButton: "Login",
 };
 
-export class LoginPage {
-  private readonly page: HTMLElement;
-
+export class LoginPage extends PageBaseClass {
   constructor() {
-    this.page = document.createElement("main");
+    super([document.createElement("main")]);
     this.page.classList.add("login-page");
     this.page.append(new Form(formOptions).render());
+
+    this.userChanged();
+    store.subscribe(() => {
+      this.userChanged();
+    });
+  }
+
+  userChanged() {
+    const state = store.getState().user;
+    if (state.username) {
+      router.navigate("/");
+    }
   }
 
   render() {
+    this.appendHeaderAndFooter();
     return this.page;
   }
 }
