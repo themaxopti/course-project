@@ -1,0 +1,22 @@
+.router-navigation {
+  padding-top: 20px;
+  font-family: "Rubik";
+  display: flex;
+  column-gap: 16px;
+  font-size: 16px;
+  font-weight: 400;
+  &__link {
+    display: flex;
+    column-gap: 9px;
+  }
+
+  &__link:not(:last-child) {
+    color: #666666;
+  }
+
+  &__link:last-child {
+    img {
+      display: none;
+    }
+  }
+}

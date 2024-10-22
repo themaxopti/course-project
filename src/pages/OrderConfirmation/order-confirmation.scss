@@ -1,0 +1,37 @@
+.order-confirmation {
+  margin-top: 20px !important;
+  margin-bottom: 100px !important;
+  //   margin: 1000px 0px 0px 0px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+  min-height: 300px;
+  font-weight: 700;
+
+  &__title {
+    font-family: "Poppins";
+    font-size: 60px;
+    @media (max-width: 626px) {
+      font-size: 32px;
+    }
+  }
+
+  .confirm-message {
+    line-height: 22px;
+    font-family: "Rubik";
+    color: #00000099;
+    border-radius: 20px;
+    max-width: 715px;
+    width: 100%;
+    padding: 20px;
+    border: 1px solid #0000001a;
+  }
+
+  @media (max-width: 350px) {
+    margin-bottom: 200px !important;
+  }
+
+  @media (max-width: 644px) {
+    margin-bottom: 180px !important;
+  }
+}

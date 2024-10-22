@@ -13,6 +13,8 @@
 @import "../components//main-banner/cta-banner/cta-banner.scss";
 @import "../components/brands-line/brands.line.scss";
 @import "../components/main-categories/main-categories.scss";
+@import "../components/Navigation/navigation.scss";
+@import "../pages/OrderConfirmation/order-confirmation.scss";
 
 * {
   box-sizing: border-box;
@@ -48,7 +50,7 @@ body {
   max-width: 1240px;
   width: 100%;
   margin: 0 auto;
-  @media (max-width: 400px) {
+  @media (max-width: 1240px) {
     padding-left: 16px;
     padding-right: 16px;
   }
