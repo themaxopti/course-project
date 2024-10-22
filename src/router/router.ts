@@ -2,6 +2,7 @@ import Navigo from "navigo";
 import { MainPage } from "../pages/MainPage";
 import { TestPage } from "../pages/TestPage";
 import { LoginPage } from "../pages/Login/LoginPage.ts";
+import { OrderConfirmationPage } from "../pages/OrderConfirmation/OrderConfirmation.ts";
 
 export const router = new Navigo('/', {});
 
@@ -21,4 +22,10 @@ router.on('/sign-in', function () {
   const loginPage = new LoginPage()
   document.querySelector('#root')!.innerHTML = ''
   document.querySelector('#root')?.append(loginPage.render())
+});
+
+router.on('/order-confirmation', function () {
+  const orderConfirmationPage = new OrderConfirmationPage()
+  document.querySelector('#root')!.innerHTML = ''
+  document.querySelector('#root')?.append(orderConfirmationPage.render())
 });

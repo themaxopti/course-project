@@ -44,6 +44,11 @@
 .header {
   font-family: "Poppins";
 
+  @media(max-width:1240px){
+    // padding-left: 16px;
+    // padding-rig  ht: 16px;
+  }
+
   &__burger {
     display: none;
     cursor: pointer;

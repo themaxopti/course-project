@@ -74,12 +74,15 @@ const styledFooter = `
 `;
 
 export class Footer {
-  element: HTMLDivElement | null = null;
+  element: DocumentFragment | null = null;
 
   constructor() {}
 
   render() {
-    this.element = createDiv(styledFooter, "wrapper footer");
+    this.element = document.createDocumentFragment();
+    const footer = createDiv(styledFooter, "wrapper footer");
+    
+    this.element.appendChild(footer);
     return this.element;
   }
 }
