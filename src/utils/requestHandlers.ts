@@ -1,10 +1,13 @@
 import { ENV } from "../../env.ts";
-import axios from "axios";
+import axios, { Axios, AxiosResponse } from "axios";
 import { store } from "../state/store.ts";
 import { setUser } from "../state/actions/user/userActions.ts";
 import { router } from "../router/router.ts";
 import { Category } from "../components/main-categories/category-api.model.ts";
 import { createHTMLElement } from "./create-html-element.ts";
+import { ProductType } from "../types/requestHandlers.types.ts";
+
+const api = axios.create({ url: ENV.BASE_URL });
 
 export const requestHandlers = {
   signIn: (username: string, password: string) => {
@@ -52,5 +55,11 @@ export const requestHandlers = {
         console.error("There was a problem with the fetch operation:", error);
         throw new Error(error);
       });
+  },
+
+  getProduct: async (
+    id: string | number
+  ): Promise<AxiosResponse<ProductType>> => {
+    return await axios.get<ProductType>(`${ENV.BASE_URL}products/${id}`);
   },
 };

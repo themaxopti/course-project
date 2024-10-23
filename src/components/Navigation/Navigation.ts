@@ -7,16 +7,27 @@ export class Navigation {
   routes: string[];
   routeTitles = {
     ["order-confirmation"]: "Order Confirmation",
+    ["product-detail"]: "Product",
   };
 
-  constructor() {
-    let routes: string[] | string = window.location.pathname;
-    routes = routes.split("/");
-    routes.shift();
+  constructor(paths?: string[]) {
+    if (!paths) {
+      let routes: string[] | string = window.location.pathname;
+      routes = routes.split("/");
+      routes.shift();
 
-    this.routes = routes.map((route) => {
-      return this.routeTitles[route] || route;
+      this.routes = routes.map((route) => {
+        return route;
+      });
+      return;
+    }
+    console.log("hi");
+
+    this.routes = paths.map((path) => {
+      return path;
     });
+
+
   }
 
   render() {
@@ -29,16 +40,15 @@ export class Navigation {
                 <img src=${arrow} />
             </div>
             ${this.routes
-                .map((el) => {
+              .map((el) => {
                 return `
                     <div class="router-navigation__link">
                         <div>${el}</div>
                         <img src=${arrow} />
                     </div>
                     `;
-                })
-                .join("")
-            }
+              })
+              .join("")}
         </div>
     </div>
     `,

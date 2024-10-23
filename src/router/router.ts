@@ -3,6 +3,7 @@ import { MainPage } from "../pages/MainPage";
 import { TestPage } from "../pages/TestPage";
 import { LoginPage } from "../pages/Login/LoginPage.ts";
 import { OrderConfirmationPage } from "../pages/OrderConfirmation/OrderConfirmation.ts";
+import { ProductDetailPage } from "../pages/ProductDetail/ProductDetail.ts";
 
 export const router = new Navigo('/', {});
 
@@ -29,3 +30,12 @@ router.on('/order-confirmation', function () {
   document.querySelector('#root')!.innerHTML = ''
   document.querySelector('#root')?.append(orderConfirmationPage.render())
 });
+
+
+router.on('/product-detail', function () {
+  const productDetailPage = new ProductDetailPage()
+  document.querySelector('#root')!.innerHTML = ''
+  document.querySelector('#root')?.append(productDetailPage.render())
+});
+
+
