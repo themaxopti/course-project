@@ -1,0 +1,129 @@
+.div-category-page-container {
+  max-width: 1240px;
+  margin: auto;
+}
+
+.div-category-product-card {
+  width: 295px;
+  border-radius: 20px;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    cursor: pointer;
+  }
+
+  .div-img-container {
+    width: 100%;
+    height: 298px;
+    border-radius: 20px;
+    background-color: #F0EEED;
+    overflow: hidden;
+
+    .img-product-card {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .div-product-info {
+    padding: 17px 0;
+
+    .h3-product-title {
+      width: 100%;
+      font-size: 18px;
+      font-weight: 700;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin: 0 0 5px;
+
+    }
+
+    .p-product-brand {
+      margin: 0 0 10px;
+      color: #666;
+    }
+
+    .div-price-container {
+      display: flex;
+      gap: 5px;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-bottom: 10px;
+
+      .span-product-price {
+        font-size: 18px;
+        font-weight: 700;
+        margin-right: 10px;
+      }
+
+      .span-original-price {
+        text-decoration: line-through;
+        color: #999;
+        font-size: 18px;
+      }
+
+      .span-product-discount {
+        background-color: #f7d7d7;
+        color: #FF3333;
+        font-size: 12px;
+        font-weight: 500;
+        padding: 7px 14px;
+        border-radius: 50px;
+        margin-right: 10px;
+      }
+    }
+
+    .div-product-rating {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+
+      .div-stars-container {
+        display: inline-block;
+        font-size: 20px;
+        line-height: 1;
+        margin-right: 5px;
+
+        .span-star {
+          color: #ddd;
+          display: inline-block;
+
+          &::before {
+            content: '★';
+          }
+
+          &.full {
+            color: #ffc107;
+          }
+
+          &.half {
+            position: relative;
+            
+            &::before {
+              color: #ddd;
+              content: '★';
+            }
+
+            &::after {
+              color: #ffc107;
+              content: '★';
+              position: absolute;
+              left: 0;
+              width: 50%;
+              overflow: hidden;
+            }
+          }
+        }
+      }
+
+      .span-rating-text {
+        font-weight: 700;
+        color: #666;
+      }
+    }
+  }
+}

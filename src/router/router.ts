@@ -1,8 +1,9 @@
 import Navigo from "navigo";
-import { MainPage } from "../pages/MainPage";
+import { MainPage } from "../pages/Main/MainPage.ts";
 import { TestPage } from "../pages/TestPage";
 import { LoginPage } from "../pages/Login/LoginPage.ts";
 import { OrderConfirmationPage } from "../pages/OrderConfirmation/OrderConfirmation.ts";
+import { CategoryPage } from "../pages/Category/CategoryPage.ts";
 
 export const router = new Navigo('/', {});
 
@@ -29,3 +30,14 @@ router.on('/order-confirmation', function () {
   document.querySelector('#root')!.innerHTML = ''
   document.querySelector('#root')?.append(orderConfirmationPage.render())
 });
+
+router.on('/category/:categoryName', function (obj) {
+  const route = obj.url.split('/')[1];
+  const categoryPage = new CategoryPage(route);
+  document.querySelector('#root')!.innerHTML = '';
+
+  categoryPage.render()
+    .then(data => document.querySelector('#root')?.append(data));
+});
+
+

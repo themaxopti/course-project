@@ -13,6 +13,11 @@
 @import "../components//main-banner/cta-banner/cta-banner.scss";
 @import "../components/brands-line/brands.line.scss";
 @import "../components/main-categories/main-categories.scss";
+
+@import "../pages/Category/category-page.scss";
+@import "../components/category-product-card/category-product-card.scss";
+@import "../components//filter-panel//filter-panel.scss";
+
 @import "../components/Navigation/navigation.scss";
 @import "../pages/OrderConfirmation/order-confirmation.scss";
 
@@ -25,6 +30,7 @@
 
 html {
   height: 100%;
+  scroll-behavior: smooth;
 }
 
 body {

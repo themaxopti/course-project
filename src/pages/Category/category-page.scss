@@ -1,0 +1,16 @@
+.div-category-page-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.h2-title-cards-block {
+  text-transform: capitalize;
+}
+
+.all-cards-block {
+  width: 100%;
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
