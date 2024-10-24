@@ -76,3 +76,4 @@ export const productTitleSelector = () => store.getState().product.data.title
 export const productPriceSelector = () => store.getState().product.data.price
 export const productDiscountSelector = () => store.getState().product.data.discountPercentage
 export const productImagesSelector = () => store.getState().product.data.images
+export const productCategorySelector = () => store.getState().product.data.category

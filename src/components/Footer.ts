@@ -6,7 +6,7 @@ const styledFooter = `
               <div class="footer__black-box__title">STAY UPTO DATE ABOUT <br> OUR LATEST OFFERS</div>
               <div class="footer__black-box__form">
                 <div>
-                  <img src="./src/assets/footer/cover.svg" alt="">
+                  <img src="/src/assets/footer/cover.svg" alt="">
                   <input placeholder="Enter your email address" type="text">
                 </div>
                 <div>Subscribe to Newsletter</div>
@@ -17,10 +17,10 @@ const styledFooter = `
               <div class="logo-text">SHOP.CO</div>
               <p>We have clothes that suits your style and which you’re proud to wear. From women to men.</p>
               <div class="footer__socials">
-                <img src="./src/assets/footer/twitter.svg" alt="">
-                <img src="./src/assets/footer/facebook.svg" alt="">
-                <img src="./src/assets/footer/instagram.svg" alt="">
-                <img src="./src/assets/footer/github.svg" alt="">
+                <img src="/src/assets/footer/twitter.svg" alt="">
+                <img src="/src/assets/footer/facebook.svg" alt="">
+                <img src="/src/assets/footer/instagram.svg" alt="">
+                <img src="/src/assets/footer/github.svg" alt="">
               </div>
             </div>
             <div class="footer__content__block">
@@ -63,11 +63,11 @@ const styledFooter = `
           <div class="footer__pay">
             <div class="footer__pay__desc">Shop.co © 2000-2023, All Rights Reserved</div>
             <div>
-              <img src="./src/assets/footer/visa.svg" alt="">
-              <img src="./src/assets/footer/mastercard.svg" alt="">
-              <img src="./src/assets/footer/paypal.svg" alt="">
-              <img src="./src/assets/footer/applepay.svg" alt="">
-              <img src="./src/assets/footer/googlepay.svg" alt="">
+              <img src="/src/assets/footer/visa.svg" alt="">
+              <img src="/src/assets/footer/mastercard.svg" alt="">
+              <img src="/src/assets/footer/paypal.svg" alt="">
+              <img src="/src/assets/footer/applepay.svg" alt="">
+              <img src="/src/assets/footer/googlepay.svg" alt="">
             </div>
           </div>
       </div>

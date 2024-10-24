@@ -16,15 +16,15 @@ export class ProductDetailPage {
   element: DocumentFragment | null = null;
   children: [Header, Navigation, OrderConfirmation, Footer];
 
-  constructor() {
+  constructor(productId: string) {
     this.children = [
       new Header(),
-        new Navigation(['hi','hi']),
+      // new Navigation(['hi','hi']),
       new ProductDetail(),
       new Footer(),
     ] as any;
 
-    store.dispatch(getProduct(10));
+    store.dispatch(getProduct(productId));
     // store.subscribe(() => {
     //   if (isProductLoadingSelector() === false) {
 

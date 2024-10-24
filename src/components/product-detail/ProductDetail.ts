@@ -1,17 +1,13 @@
-import { Footer } from "../../components/Footer";
-import { Header } from "../../components/Header";
 import { Navigation } from "../../components/Navigation/Navigation";
 import { OrderConfirmation } from "../../components/order-confirmation/order-confirmation";
-import { createContainer, createDiv } from "../../helpers/createHtmlTags";
+import { createContainer } from "../../helpers/createHtmlTags";
 import { router } from "../../router/router";
 import { createHTMLElement } from "../../utils/create-html-element";
-import imgOne from "../../assets/product-detail/image 2.png";
-import imgTwo from "../../assets/product-detail/image 5.png";
-import imgThree from "../../assets/product-detail/image 6.png";
 import { store } from "../../state/store";
 import {
   isProductLoadingSelector,
   productBrandSelector,
+  productCategorySelector,
   productDescriptionSelector,
   productDiscountSelector,
   productImagesSelector,
@@ -20,10 +16,6 @@ import {
   productStockSelector,
   productTitleSelector,
 } from "../../state/reducers/productReducer/productReducer";
-
-function makeRating() {
-  const count = 3.89;
-}
 
 export class ProductDetailImgages {
   element: HTMLDivElement;
@@ -56,61 +48,34 @@ export class ProductDetailImgages {
 }
 
 function calculatePercentage(max, min) {
-  // Проверяем, что min меньше или равно max
   if (min > max) {
     throw new Error("Младшее число не может быть больше старшего числа.");
   }
 
-  // Вычисляем процент
   const percentage = (min / max) * 100;
 
   return percentage;
 }
 
 function calculateValueFromPercentage(number, percentage) {
-  // Проверяем, что процент находится в допустимых пределах (0-100)
   if (percentage < 0 || percentage > 100) {
     throw new Error("Процент должен быть в диапазоне от 0 до 100.");
   }
 
-  // Вычисляем значение
   const value = (percentage / 100) * number;
 
   return value;
 }
 
-// export class ProductStars {
-//   element: HTMLDivElement;
-
-//   constructor(stars: number) {
-//     this.element = createDiv(
-//       `
-//           <img src="./src/assets/product-detail/Star 1.svg" alt="">
-//           <img src="./src/assets/product-detail/Star 1.svg" alt="">
-//           <img src="./src/assets/product-detail/Star 1.svg" alt="">
-//           <img src="./src/assets/product-detail/Star 1.svg" alt="">
-//           <img src="./src/assets/product-detail/Star 1.svg" alt="">
-//         `,
-//       "product-detail__info__stars"
-//     );
-
-//     // document.querySelector('.product-detail__info__mark').innerHTML = '1'
-//   }
-
-//   render() {
-//     return this.element;
-//   }
-// }
-
-// <div class="product-detail__image"><img src="./src/assets/product-detail/image 2.png" alt=""></div>
-// <div class="product-detail__image"><img src="./src/assets/product-detail/image 5.png" alt=""></div>
-// <div class="product-detail__image"><img src="./src/assets/product-detail/image 6.png" alt=""></div>
+function makeDiscount(price, percentage) {
+  const procentValue = calculateValueFromPercentage(price, percentage);
+  return price - procentValue;
+}
 
 export class ProductDetail {
   element: HTMLDivElement | null = null;
 
   constructor() {
-    // console.log(new ProductDetailImgages().render().textContent);
     store.subscribe(() => {
       if (isProductLoadingSelector() === false) {
         console.log("here");
@@ -171,16 +136,19 @@ export class ProductDetail {
           <div class="product-detail__info__title">${productTitleSelector()}</div>
           <div class="product-detail__info__mark">
             <div class="product-detail__info__stars">
-                <img src="./src/assets/product-detail/Star 1.svg" alt="">
-                <img src="./src/assets/product-detail/Star 1.svg" alt="">
-                <img src="./src/assets/product-detail/Star 1.svg" alt="">
-                <img src="./src/assets/product-detail/Star 1.svg" alt="">
-                <img src="./src/assets/product-detail/Star 1.svg" alt="">
+                <img src="/src/assets/product-detail/Star 1.svg" alt="">
+                <img src="/src/assets/product-detail/Star 1.svg" alt="">
+                <img src="/src/assets/product-detail/Star 1.svg" alt="">
+                <img src="/src/assets/product-detail/Star 1.svg" alt="">
+                <img src="/src/assets/product-detail/Star 1.svg" alt="">
             </div>
             <div>${productRatingSelector().toFixed(1)}/5</div>
           </div>
           <div class="product-detail__info__price">
-            <div><span class="product-detail--real-price">$${productPriceSelector()}</span></div>
+            <div><span class="product-detail--real-price">
+              $${makeDiscount(productPriceSelector(),productDiscountSelector()).toFixed(2)} 
+              <span class="product-detail__dicsount__price">$${productPriceSelector()}</span>
+            </div>
             <div class="product-detail--discount">-${productDiscountSelector().toFixed(0)}%</div>
           </div>
           <div class="product-detail__info__desc">
@@ -188,7 +156,7 @@ export class ProductDetail {
           </div>
           <div class="product-detail__info__brand">
             <div>Brand</div>
-            <div>${productBrandSelector()}</div>
+            <div>${productBrandSelector() || "No brand"}</div>
           </div>
           <div class="product-detail__info__stock">
             <div>In stock</div>
@@ -209,12 +177,18 @@ export class ProductDetail {
       ["product-detail"]
     );
 
-    const navigation = new Navigation(["1", "2"]).render();
+    const page = document.createElement("div");
+    const navigation = new Navigation([
+      isProductLoadingSelector() ? "..." : productCategorySelector(),
+      isProductLoadingSelector() ? "..." : productTitleSelector(),
+    ]).render();
+    page.append(navigation);
+    page.append(productDetail);
 
     if (this.element) {
-      this.element.replaceWith(productDetail);
+      this.element.replaceWith(page);
     }
-    this.element = productDetail;
+    this.element = page;
 
     return this.element;
   }

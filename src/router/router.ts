@@ -32,8 +32,10 @@ router.on('/order-confirmation', function () {
 });
 
 
-router.on('/product-detail', function () {
-  const productDetailPage = new ProductDetailPage()
+router.on('/product/:id', function (params) {
+  console.log(params.data.id);
+  
+  const productDetailPage = new ProductDetailPage(params.data.id)
   document.querySelector('#root')!.innerHTML = ''
   document.querySelector('#root')?.append(productDetailPage.render())
 });
