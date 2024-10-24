@@ -3,13 +3,21 @@ import { InputEnum } from "../input/InputEnum.ts";
 export interface FormOptionsModel {
   title?: string;
   fields: FormFieldModel[];
-  submitButton: string;
+  submit?: {
+    textContent?: string,
+    handlerName?: string,
+    sendId?: string[],
+  };
 }
 
 export interface FormFieldModel {
   type: Omit<InputEnum, InputEnum.SUBMIT>;
-  placeholder: string;
+  id?: string;
+  textContent?: string;
+  addDivider?: boolean;
   validationRules?: FormFieldValidationRule[];
+  formatter?: 'card' | 'phone';
+  value?: string;
 }
 
 export interface FormFieldValidationRule {

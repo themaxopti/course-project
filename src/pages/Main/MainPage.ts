@@ -12,9 +12,4 @@ export class MainPage extends PageBaseClass {
     ]);
     this.page.classList.add("main-page");
   }
-
-  render() {
-    this.appendHeaderAndFooter();
-    return this.page;
-  }
 }

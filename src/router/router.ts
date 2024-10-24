@@ -3,6 +3,8 @@ import { MainPage } from "../pages/Main/MainPage.ts";
 import { TestPage } from "../pages/TestPage";
 import { LoginPage } from "../pages/Login/LoginPage.ts";
 import { OrderConfirmationPage } from "../pages/OrderConfirmation/OrderConfirmation.ts";
+import { CheckoutPage } from "../pages/Checkout/CheckoutPage.ts";
+import { PaymentPage } from "../pages/Payment/PaymentPage.ts";
 import { CategoryPage } from "../pages/Category/CategoryPage.ts";
 
 export const router = new Navigo('/', {});
@@ -29,6 +31,18 @@ router.on('/order-confirmation', function () {
   const orderConfirmationPage = new OrderConfirmationPage()
   document.querySelector('#root')!.innerHTML = ''
   document.querySelector('#root')?.append(orderConfirmationPage.render())
+});
+
+router.on('/checkout', function () {
+  const checkoutPage = new CheckoutPage()
+  document.querySelector('#root')!.innerHTML = ''
+  document.querySelector('#root')?.append(checkoutPage.render())
+});
+
+router.on('/payment', function () {
+  const paymentPage = new PaymentPage()
+  document.querySelector('#root')!.innerHTML = ''
+  document.querySelector('#root')?.append(paymentPage.render())
 });
 
 router.on('/category/:categoryName', function (obj) {
