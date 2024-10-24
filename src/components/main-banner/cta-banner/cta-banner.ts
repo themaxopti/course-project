@@ -29,7 +29,6 @@ export class CtaBanner {
     const divider2 = createHTMLElement('div', ['div-info-divider', 'div-info-divider-2']);
 
     BANNERINFO.infoNumbers.forEach((infoNumber: InfoNumbers, index: number) => {
-      console.log(index)
       if (index % 2 !== 0) infoNumbersBlock.append(divider);
 
       const infoElement = createHTMLElement('div', ['div-info-element']);

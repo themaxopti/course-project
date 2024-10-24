@@ -1,11 +1,14 @@
 .div-category-page-container {
   width: 100%;
   display: flex;
-  flex-direction: row-reverse;
+  gap: 20px;
+  flex-direction: row;
+  padding-top: 27px;
 }
 
 .h2-title-cards-block {
   text-transform: capitalize;
+  margin-bottom: 20px;
 }
 
 .all-cards-block {
@@ -13,4 +16,9 @@
   display: flex;
   gap: 20px;
   flex-wrap: wrap;
+}
+
+
+.div-filters-container-on-page {
+  width: 295px;
 }

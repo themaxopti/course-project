@@ -16,11 +16,12 @@ export class CategoryPage extends PageBaseClass {
   cardsBlock: HTMLElement;
   categoryPageContainer: HTMLElement;
 
-  constructor(title: string) {
+  constructor(categoryName: string) {
     super([
       new Navigation().render(),
     ]);
-    this.categoryName = title;
+
+    this.categoryName = categoryName;
 
     this.page.classList.add("category-page");
 
@@ -38,17 +39,33 @@ export class CategoryPage extends PageBaseClass {
     cardsContainer.append(this.cardsBlock); 
   }
 
+  async fetchProductsData() {
+    return await fetchData(`${BASE_URL_CATEGORY}${this.categoryName}`);
+  }
 
-  async renderCards() {
+
+  async renderCards(brandsFilter: string[] = [], price: number[] = [10, 20000000]) {
+
+   this.cardsBlock.innerHTML = '';
 
     const data = await fetchData(`${BASE_URL_CATEGORY}${this.categoryName}`);
 
-    this.categoryData = data.products;
-    console.log('dat', data);
-    console.log(this.categoryData);
-      this.categoryData?.forEach((product: Product) => {
-        if (product.brand) this.brands.push(product.brand);
+    data.products.forEach((product: Product) => {
+      if (product.brand) this.brands.push(product.brand);
+        this.brands = [...new Set(this.brands)];
+    })
 
+    const filteredData = data.products.filter((product: Product) => {
+      let priceAfterDiscount = product.price * (100 - product.discountPercentage) / 100;
+      priceAfterDiscount = +priceAfterDiscount.toFixed(2);
+      if (!brandsFilter.length) {
+        return priceAfterDiscount >= price[0] && priceAfterDiscount <= price[1]
+      } else {
+        return priceAfterDiscount >= price[0] && priceAfterDiscount <= price[1] && brandsFilter.includes(product.brand);
+      }
+    });
+
+      filteredData.forEach((product: Product) => {
         const productCard = new CategoryProductCard(product).render();
         productCard.addEventListener('click', () => {
           router.navigate(`/product/${product.id}`);
@@ -58,7 +75,18 @@ export class CategoryPage extends PageBaseClass {
   }
 
   renderFilterPanel() {
-    this.categoryPageContainer.append(new FilterPanel(this.brands).render());
+    const filterPanel = new FilterPanel(
+      this.brands,
+      async (selectedBrands, priceRange) => {
+        await this.renderCards(selectedBrands, priceRange);
+      },
+      async () => {
+        await this.renderCards();
+      }
+    );
+    const filtersContainer = createHTMLElement('div', ['div-filters-container-on-page']);
+    this.categoryPageContainer.prepend(filtersContainer);
+    filtersContainer.prepend(filterPanel.render());
   }
 
   async render() {

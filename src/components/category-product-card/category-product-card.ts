@@ -41,7 +41,7 @@ export class CategoryProductCard {
     const ratingContainer = createHTMLElement('div', ['div-product-rating']);
     const starsElement = this.createStarRating(this.rating);
     const ratingTextElement = createHTMLElement('span', ['span-rating-text']);
-    ratingTextElement.textContent = this.rating.toFixed(1);
+    ratingTextElement.textContent = `${this.rating.toFixed(1)}/5`;
     ratingContainer.append(starsElement);
     ratingContainer.append(ratingTextElement);
     infoContainer.append(ratingContainer);
