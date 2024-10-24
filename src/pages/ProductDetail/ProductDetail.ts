@@ -25,11 +25,11 @@ export class ProductDetailPage {
     ] as any;
 
     store.dispatch(getProduct(productId));
-    // store.subscribe(() => {
-    //   if (isProductLoadingSelector() === false) {
-
-    //   }
-    // });
+    store.subscribe(() => {
+      if (isProductLoadingSelector() === false) {
+        // this.render()
+      }
+    });
   }
 
   render() {

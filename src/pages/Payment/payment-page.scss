@@ -1,0 +1,65 @@
+.payment-page {
+  display: flex;
+  flex-direction: column;
+
+  h1 {
+    font-size: 40px;
+    font-weight: 700;
+    margin-top: 21px;
+    margin-bottom: 20px;
+
+    @media (max-width: 768px) {
+      font-size: 32px;
+      margin-top: 5px;
+      margin-bottom: 15px;
+    }
+  }
+
+  .payment-page__content {
+    display: flex;
+    flex-direction: column;
+
+    .payment-page__block {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-evenly;
+      width: 100%;
+      gap: 20px;
+
+      .payment-form {
+        padding: 20px 24px;
+        margin: 0;
+        flex-shrink: 2;
+        width: 100%;
+        min-height: 200px;
+        height: fit-content;
+        min-width: 350px;
+        max-width: 715px;
+
+        @media (max-width: 768px) {
+          max-width: 100dvw;
+          min-width: 0;
+          padding: 14px;
+        }
+      }
+
+      .payment-order-summary {
+        height: fit-content;
+        flex-grow: 1;
+        width: 100%;
+        min-width: 300px;
+
+        @media (max-width: 768px) {
+          max-width: 100dvw;
+          min-width: 0;
+        }
+      }
+
+      @media (max-width: 768px) {
+        flex-direction: column;
+        gap: 20px;
+      }
+    }
+  }
+}
+

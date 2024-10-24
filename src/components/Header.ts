@@ -1,7 +1,6 @@
 import { createDiv } from "../helpers/createHtmlTags";
+import { router } from "../router/router.ts";
 import { store } from "../state/store.ts";
-import basketImg from './src/assets/header/basket.svg'
-
 
 const styledHeader = `
     <div class="wrapper discount-header">
@@ -28,19 +27,11 @@ const styledHeader = `
 export class Header {
   element: HTMLDivElement | null = null;
 
-  constructor() {
-    this.userChanged();
-    store.subscribe(() => {
-      this.userChanged();
-    });
-  }
-
-  userChanged() {
-    const state = store.getState().user;
-    console.log("user:", state || "no user");
-  }
-
   render() {
-    return createDiv(styledHeader);
+    const header = createDiv(styledHeader,'app-header')
+    header.querySelector('.logo-text').addEventListener('click',() => {
+      router.navigate('/')
+    })
+    return header ;
   }
 }

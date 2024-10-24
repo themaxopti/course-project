@@ -74,11 +74,14 @@ function makeDiscount(price, percentage) {
 
 export class ProductDetail {
   element: HTMLDivElement | null = null;
-
+  unsubscribe: () => void
+  
   constructor() {
-    store.subscribe(() => {
+    window.scrollTo({
+      top: 0,
+    });
+    this.unsubscribe = store.subscribe(() => {
       if (isProductLoadingSelector() === false) {
-        console.log("here");
         this.render();
         this.renderProductStars();
         this.addGaleryListeners();
@@ -101,7 +104,6 @@ export class ProductDetail {
 
         div.classList.add("product-detail__image--active");
         const imgPath: string = div.querySelector("img").src;
-        console.log(imgPath);
         document
           .querySelector<HTMLImageElement>(".product-detail__image--main img")
           .setAttribute("src", imgPath);
@@ -121,9 +123,13 @@ export class ProductDetail {
     productDetailStars.style.width = `${newWidth}px`;
   }
 
-  render() {
-    console.log("render");
+  destroy() {
+    if (this.unsubscribe) {
+      this.unsubscribe(); 
+    }
+  }
 
+  render() {
     const productDetail = createContainer(
       store.getState().product.isLoading
         ? "loading"
@@ -146,7 +152,7 @@ export class ProductDetail {
           </div>
           <div class="product-detail__info__price">
             <div><span class="product-detail--real-price">
-              $${makeDiscount(productPriceSelector(),productDiscountSelector()).toFixed(2)} 
+              $${makeDiscount(productPriceSelector(), productDiscountSelector()).toFixed(2)} 
               <span class="product-detail__dicsount__price">$${productPriceSelector()}</span>
             </div>
             <div class="product-detail--discount">-${productDiscountSelector().toFixed(0)}%</div>

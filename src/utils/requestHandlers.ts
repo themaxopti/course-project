@@ -10,23 +10,24 @@ import { ProductType } from "../types/requestHandlers.types.ts";
 const api = axios.create({ url: ENV.BASE_URL });
 
 export const requestHandlers = {
-  signIn: (username: string, password: string) => {
-    axios
-      .post(`${ENV.BASE_URL}auth/login`, {
+  signIn: async (username: string, password: string) => {
+    try {
+      const response = await axios.post(`${ENV.BASE_URL}auth/login`, {
         username: username,
         password: password,
-      })
-      .then((response) => {
-        const data = response.data;
-        localStorage.setItem("accessToken", data.accessToken);
-        localStorage.setItem("refreshToken", data.refreshToken);
-        store.dispatch(setUser(data));
-        router.navigate("/");
-      })
-      .catch((error) => {
-        console.log(error.response.data.message);
-        throw new Error(error.response.data.message);
       });
+      const data = response.data;
+      localStorage.setItem("accessToken", data.accessToken);
+      localStorage.setItem("refreshToken", data.refreshToken);
+      data.userType = "limited";
+      store.dispatch(setUser(data));
+      router.navigate("/checkout");
+    } catch (error) {
+      console.error(error);
+      const errorMessage =
+        error.response?.data?.message || "An unknown error occurred";
+      throw new Error(errorMessage);
+    }
   },
 
   getCategories: (containerCategories: HTMLElement) => {
@@ -61,5 +62,27 @@ export const requestHandlers = {
     id: string | number
   ): Promise<AxiosResponse<ProductType>> => {
     return await axios.get<ProductType>(`${ENV.BASE_URL}products/${id}`);
+  },
+
+  checkout: () => {
+    router.navigate("/payment");
+  },
+
+  payment: () => {
+    router.navigate("/order-confirmation");
+  },
+
+  getUser: async () => {
+    try {
+      const response = await axios.get(`${ENV.BASE_URL}auth/user/me`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      });
+      response.data.userType = "full";
+      store.dispatch(setUser(response.data));
+    } catch (error) {
+      console.error("Error fetching user data:", error);
+    }
   },
 };

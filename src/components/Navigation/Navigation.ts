@@ -1,5 +1,6 @@
 import { createDiv } from "../../helpers/createHtmlTags";
-import arrow from "../../assets/navigation/arrow.svg";
+// import arrow from "../../assets/navigation/arrow.svg";
+// import arrow from "../../assets/navigation/arrow.svg";
 
 export class Navigation {
   element: HTMLDivElement | null = null;
@@ -37,14 +38,14 @@ export class Navigation {
         <div class="router-navigation">
             <div class="router-navigation__link">
                 <div>Home</div>
-                <img src=${arrow} />
+                <img src="/src/assets/navigation/arrow.svg" />
             </div>
             ${this.routes
               .map((el) => {
                 return `
                     <div class="router-navigation__link">
                         <div>${el}</div>
-                        <img src=${arrow} />
+                        <img src="/src/assets/navigation/arrow.svg" />
                     </div>
                     `;
               })

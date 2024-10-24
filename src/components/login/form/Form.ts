@@ -10,45 +10,33 @@ export class Form {
   constructor(options: FormOptionsModel) {
     this.node = document.createElement("form");
     this.node.classList.add("login-form");
-    const title = document.createElement("h2");
-    title.textContent = options.title;
-    this.node.append(title);
+
+    if (options.title) {
+      const title = document.createElement("h2");
+      title.textContent = options.title;
+      this.node.append(title);
+    }
 
     options.fields.forEach((field) => {
-      const input = new Input(field.type as InputEnum, field.placeholder, field.validationRules);
+      const input = new Input(field);
       this.fields.push(input);
       this.node.append(input.render());
     });
 
-    const submitButton = new Input(
-      InputEnum.SUBMIT,
-      options.submitButton
-    ).render();
-    this.node.append(submitButton);
+    if (options.submit.textContent) {
+      const submitButton = new Input({
+        type: InputEnum.SUBMIT as string,
+        textContent: options.submit.textContent,
+      }).render();
+      this.node.append(submitButton);
+    }
 
-    this.node.addEventListener("submit", (event: Event) => {
-      event.preventDefault();
-      let valid = true;
-      this.fields.forEach((field) => {
-        if (!field.valid) {
-          valid = false;
-        }
-        if (field.node.value === "") {
-          this.setFormError("All fields are required.");
-          valid = false;
-        }
-      });
-
-      if (valid) {
-        this.removeFormError();
-        this.sendForm();
-      } else {
-        console.log("not submitting");
-      }
-    });
+    if (options.submit.handlerName) {
+      this.node.addEventListener("submit", this.handleSubmit.bind(this, options.submit));
+    }
   }
 
-  setFormError(message: string = 'Something went wrong. Try again.') {
+  private setFormError(message: string = 'Something went wrong. Try again.') {
     this.removeFormError();
     const errorNode = document.createElement("span");
     errorNode.classList.add("login-form__error-message");
@@ -56,18 +44,52 @@ export class Form {
     this.node.append(errorNode);
   }
 
-  removeFormError() {
+  private removeFormError() {
     const errorNode = this.node.querySelector(".login-form__error-message");
     if (errorNode) {
       errorNode.remove();
     }
   }
 
-  sendForm() {
+  private async sendForm(submit: { handlerName: string, sendId?: string[] }) {
     try {
-      requestHandlers.signIn(this.fields[0].node.value, this.fields[1].node.value);
-    } catch (error) {
+      const values = submit.sendId.map((id) => {
+        const input = this.fields.find((field) => field.node.id === id);
+        return input.realValue || input.node.value;
+      });
+      await requestHandlers[submit.handlerName](...values);
+    } catch (error: any) {
       this.setFormError(error.message);
+    }
+  }
+
+  private validateFields(): boolean {
+    let valid = true;
+    this.fields.forEach((field) => {
+      const isValid = field.valid && field.node.value;
+      field.node.classList.toggle("login-input--error", !isValid);
+      if (!isValid) {
+        valid = false;
+      }
+    });
+
+    if (!valid) {
+      this.setFormError("All fields are required.");
+    } else {
+      this.removeFormError();
+    }
+
+    return valid;
+  }
+
+  private async handleSubmit(submit: { handlerName: string, sendId?: string[] }, event: Event) {
+    event.preventDefault();
+    if (this.validateFields()) {
+      try {
+        await this.sendForm(submit);
+      } catch (error: any) {
+        this.setFormError(error.message);
+      }
     }
   }
 

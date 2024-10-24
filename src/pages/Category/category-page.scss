@@ -1,0 +1,27 @@
+.div-category-page-container {
+  max-width: 1240px;
+  display: flex;
+  gap: 20px;
+  flex-direction: row;
+  padding: 27px 0 0 10px;
+  margin: auto;
+}
+
+.h2-title-cards-block {
+  font-size: 36px;
+  text-transform: capitalize;
+  margin-bottom: 20px;
+}
+
+.all-cards-block {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.div-title-block {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
