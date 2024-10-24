@@ -36,7 +36,7 @@ export class CategoryPage extends PageBaseClass {
     cardsContainer.append(titleCardsBlock);
 
     this.cardsBlock = createHTMLElement('div', ['all-cards-block']);
-    cardsContainer.append(this.cardsBlock); 
+    cardsContainer.append(this.cardsBlock);
   }
 
   async fetchProductsData() {
@@ -93,7 +93,6 @@ export class CategoryPage extends PageBaseClass {
     this.appendHeaderAndFooter();
     await this.renderCards();
     this.renderFilterPanel();
-
     return this.page;
   }
 }

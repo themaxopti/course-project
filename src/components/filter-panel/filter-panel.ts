@@ -1,3 +1,5 @@
+// FilterPanel.ts
+
 import noUiSlider, { target } from 'nouislider';
 import 'nouislider/dist/nouislider.css';
 import { createHTMLElement } from '../../utils/create-html-element';
@@ -9,12 +11,22 @@ export class FilterPanel {
   private priceRange: [number, number] = [50, 200];
   private onApplyFilter: (brands: string[], priceRange: [number, number]) => void;
   private onResetFilter: () => void;
+  private mobileToggle: HTMLElement;
 
   constructor(brands: string[], applyCallback: (brands: string[], priceRange: [number, number]) => void, resetCallback: () => void) {
     this.brands = brands;
     this.onApplyFilter = applyCallback;
     this.onResetFilter = resetCallback;
     this.container = createHTMLElement('div', ['div-filter-panel']);
+
+    this.mobileToggle = createHTMLElement('span', ['span-filters-btn']);
+    this.mobileToggle.textContent = '₪';
+    this.mobileToggle.addEventListener('click', () => this.toggleMobilePanel());
+    document.body.appendChild(this.mobileToggle);
+  }
+
+  private toggleMobilePanel(): void {
+    this.container.classList.toggle('mobile-open');
   }
 
   private createBrandFilters(): HTMLElement {
@@ -45,7 +57,6 @@ export class FilterPanel {
 
   private createPriceFilter(): HTMLElement {
     const priceContainer = createHTMLElement('div', ['div-price-filter']);
-    priceContainer.className = 'price-filter';
     const title = createHTMLElement('h3', ['h3-title-filter']);
     title.textContent = 'Price';
     priceContainer.append(title);
@@ -94,14 +105,14 @@ export class FilterPanel {
     applyButton.textContent = 'Apply Filter';
     applyButton.addEventListener('click', () => {
       this.onApplyFilter(Array.from(this.selectedBrands), this.priceRange);
-      this.closePanel();
+      this.closeMobilePanel();
     });
 
     const resetButton = createHTMLElement('button', ['btn-filter-action', 'btn-filter-action-reset']);
     resetButton.textContent = 'Reset Filter';
     resetButton.addEventListener('click', () => {
       this.onResetFilter();
-      this.closePanel();
+      this.closeMobilePanel();
     });
 
     buttonContainer.append(applyButton);
@@ -109,25 +120,24 @@ export class FilterPanel {
     return buttonContainer;
   }
 
-  private closePanel(): void {
-    ///
-  } 
+  private closeMobilePanel(): void {
+    this.container.classList.remove('mobile-open');
+  }
 
   public render(): HTMLElement {
     const title = createHTMLElement('h2', ['h2-filter-panel-title']);
     title.textContent = 'Filters';
 
-    const filtersIcon = createHTMLElement('span', ['span-filter-icon']);
-    filtersIcon.textContent = '₪';
-    filtersIcon.addEventListener('click', () => this.closePanel());
+    const closeIcon = createHTMLElement('span', ['span-filter-icon']);
+    closeIcon.textContent = '✕';
+    closeIcon.addEventListener('click', () => this.closeMobilePanel());
 
-    title.append(filtersIcon);
+    title.append(closeIcon);
 
     this.container.append(title);
     this.container.append(this.createBrandFilters());
     this.container.append(this.createPriceFilter());
     this.container.append(this.createButtons());
-
 
     return this.container;
   }

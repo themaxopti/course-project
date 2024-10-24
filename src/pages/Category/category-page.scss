@@ -1,24 +1,27 @@
 .div-category-page-container {
-  width: 100%;
+  max-width: 1240px;
   display: flex;
   gap: 20px;
   flex-direction: row;
-  padding-top: 27px;
+  padding: 27px 0 0 10px;
+  margin: auto;
 }
 
 .h2-title-cards-block {
+  font-size: 36px;
   text-transform: capitalize;
   margin-bottom: 20px;
 }
 
 .all-cards-block {
-  width: 100%;
   display: flex;
   gap: 20px;
   flex-wrap: wrap;
 }
 
-
-.div-filters-container-on-page {
-  width: 295px;
+.div-title-block {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
+
