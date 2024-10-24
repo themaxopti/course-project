@@ -1,11 +1,11 @@
-// FilterPanel.ts
-
 import noUiSlider, { target } from 'nouislider';
 import 'nouislider/dist/nouislider.css';
 import { createHTMLElement } from '../../utils/create-html-element';
+import ImgFilter from '../../assets/filters.svg';
 
 export class FilterPanel {
   private container: HTMLElement;
+  private overlay: HTMLElement;
   private brands: string[];
   private selectedBrands: Set<string> = new Set();
   private priceRange: [number, number] = [50, 200];
@@ -19,14 +19,19 @@ export class FilterPanel {
     this.onResetFilter = resetCallback;
     this.container = createHTMLElement('div', ['div-filter-panel']);
 
-    this.mobileToggle = createHTMLElement('span', ['span-filters-btn']);
-    this.mobileToggle.textContent = '₪';
+    this.mobileToggle = createHTMLElement('img', ['img-filters-btn']);
+    this.mobileToggle.setAttribute('src', ImgFilter);
     this.mobileToggle.addEventListener('click', () => this.toggleMobilePanel());
     document.body.appendChild(this.mobileToggle);
+
+    this.overlay = createHTMLElement('div', ['filter-overlay']);
+    this.overlay.addEventListener('click', () => this.closeMobilePanel());
+    document.body.appendChild(this.overlay);
   }
 
   private toggleMobilePanel(): void {
     this.container.classList.toggle('mobile-open');
+    this.overlay.classList.toggle('mobile-open');
   }
 
   private createBrandFilters(): HTMLElement {
@@ -61,7 +66,7 @@ export class FilterPanel {
     title.textContent = 'Price';
     priceContainer.append(title);
 
-    const slider = createHTMLElement('div', ['div-slider']);
+    const slider = createHTMLElement('div', ['div-slider']) as target;
     const minPriceLabel = createHTMLElement('span', ['span-label-slider']);
     const maxPriceLabel = createHTMLElement('span', ['span-label-slider']);
 
@@ -122,13 +127,14 @@ export class FilterPanel {
 
   private closeMobilePanel(): void {
     this.container.classList.remove('mobile-open');
+    this.overlay.classList.remove('mobile-open');
   }
 
   public render(): HTMLElement {
     const title = createHTMLElement('h2', ['h2-filter-panel-title']);
     title.textContent = 'Filters';
 
-    const closeIcon = createHTMLElement('span', ['span-filter-icon']);
+    const closeIcon = createHTMLElement('span', ['span-close-icon']);
     closeIcon.textContent = '✕';
     closeIcon.addEventListener('click', () => this.closeMobilePanel());
 
