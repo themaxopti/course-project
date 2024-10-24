@@ -1,27 +1,88 @@
 import { InputEnum } from "./InputEnum.ts";
-import { FormFieldValidationRule } from "../form/FormOptions.model.ts";
+import { FormFieldModel, FormFieldValidationRule } from "../form/FormOptions.model.ts";
 
 export class Input {
+  readonly container: HTMLElement;
   readonly node: HTMLInputElement;
   private errorNode: HTMLElement = null;
   private readonly validationRules: FormFieldValidationRule[];
+  realValue?: string;
   valid: boolean = true;
 
-  constructor(type: InputEnum, text: string, validationRules?: FormFieldValidationRule[]) {
+  constructor(formField: FormFieldModel) {
+    this.container = document.createElement("div");
+    this.container.classList.add("login-input__container");
     this.node = document.createElement("input");
-    this.node.type = type;
+    this.node.type = formField.type as string;
     this.node.classList.add("login-input");
+    this.container.append(this.node);
 
-    if (type === InputEnum.SUBMIT) {
-      this.node.value = text;
+    if (formField.type === InputEnum.SUBMIT) {
+      this.node.value = formField.textContent;
     } else {
-      this.node.placeholder = text;
+      this.node.placeholder = formField.textContent;
     }
 
-    if (validationRules) {
-      this.validationRules = validationRules;
+    if (formField.validationRules) {
+      this.validationRules = formField.validationRules;
       this.validate();
     }
+
+    if (formField.addDivider) {
+      this.addDivider();
+    }
+
+    if (formField.formatter) {
+      this.formatInput(formField.formatter);
+    }
+
+    if (formField.id) {
+      this.node.id = formField.id;
+    }
+
+    if (formField.value) {
+      this.node.value = formField.value;
+      if (formField.formatter === "card") {
+        this.formatCard();
+      } else if (formField.formatter === "phone") {
+        this.formatPhone();
+      }
+    }
+  }
+
+  formatInput(formatter: string) {
+    this.node.addEventListener("input", () => {
+      if (formatter === "card") {
+        this.formatCard();
+      } else if (formatter === "phone") {
+        this.formatPhone();
+      }
+    });
+  }
+
+  formatCard() {
+    const value = this.node.value.replace(/\D/g, "");
+    this.node.value = value.replace(/(\d{1,4})/g, (_, p1) => {
+      return p1 + (p1.length % 4 === 0 ? " " : "");
+    });
+    this.realValue = value.replace(/\s/g, "");
+  }
+
+  formatPhone() {
+    const value = this.node.value.replace(/\D/g, "").replace(/-/g, "");
+    this.node.value = value.replace(/(\d{1,2})(\d{1,3})(\d{1,3})(\d{1,4})/, (_, p1, p2, p3, p4) => {
+      let result = "";
+      if (p1) result += `+${p1}`;
+      if (p2) result += ` ${p2}`;
+      if (p3) result += ` ${p3}`;
+      if (p4) result += ` ${p4}`;
+      return result;
+    });
+    this.realValue = value.replace(/\s/g, "");
+  }
+
+  addDivider() {
+    this.container.classList.add("login-input__container--divider");
   }
 
   validate() {
@@ -63,6 +124,6 @@ export class Input {
   }
 
   render() {
-    return this.node;
+    return this.container;
   }
 }

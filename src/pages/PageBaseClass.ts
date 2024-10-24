@@ -5,7 +5,7 @@ export class PageBaseClass {
   page: HTMLElement;
 
   constructor(
-    pageContent: HTMLElement[]
+    pageContent: HTMLElement[] | DocumentFragment[]
   ) {
     this.page = document.createElement("main");
     this.page.append(...pageContent);
@@ -16,5 +16,10 @@ export class PageBaseClass {
     const footer = new Footer();
     this.page.prepend(header.render());
     this.page.append(footer.render());
+  }
+
+  render() {
+    this.appendHeaderAndFooter();
+    return this.page;
   }
 }
