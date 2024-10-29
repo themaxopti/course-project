@@ -18,7 +18,7 @@ export class CategoryPage extends PageBaseClass {
 
   constructor(categoryName: string) {
     super([
-      new Navigation().render(),
+      new Navigation(['category',categoryName]).render(),
     ]);
 
     this.categoryName = categoryName;

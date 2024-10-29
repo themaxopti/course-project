@@ -1,13 +1,12 @@
 import { Navigation } from "../../components/Navigation/Navigation";
-import { OrderConfirmation } from "../../components/order-confirmation/order-confirmation";
 import { createContainer } from "../../helpers/createHtmlTags";
-import { router } from "../../router/router";
 import { createHTMLElement } from "../../utils/create-html-element";
 import { store } from "../../state/store";
 import {
   isProductLoadingSelector,
   productBrandSelector,
   productCategorySelector,
+  productDataSelector,
   productDescriptionSelector,
   productDiscountSelector,
   productImagesSelector,
@@ -16,6 +15,12 @@ import {
   productStockSelector,
   productTitleSelector,
 } from "../../state/reducers/productReducer/productReducer";
+import {
+  addManyProductsAction,
+  addProductAction,
+  makeManyProducts,
+} from "../../state/reducers/cartReducer/cartReducer";
+import { calculatePercentage, calculateValueFromPercentage, makeDiscount } from "../../utils/product-utils";
 
 export class ProductDetailImgages {
   element: HTMLDivElement;
@@ -26,6 +31,9 @@ export class ProductDetailImgages {
     ]) as HTMLDivElement;
 
     images.forEach((image, i) => {
+      if(i === 3){
+        return
+      }
       const img = document.createElement("img");
       img.setAttribute("src", image);
 
@@ -47,44 +55,27 @@ export class ProductDetailImgages {
   }
 }
 
-function calculatePercentage(max, min) {
-  if (min > max) {
-    throw new Error("Младшее число не может быть больше старшего числа.");
-  }
-
-  const percentage = (min / max) * 100;
-
-  return percentage;
-}
-
-function calculateValueFromPercentage(number, percentage) {
-  if (percentage < 0 || percentage > 100) {
-    throw new Error("Процент должен быть в диапазоне от 0 до 100.");
-  }
-
-  const value = (percentage / 100) * number;
-
-  return value;
-}
-
-function makeDiscount(price, percentage) {
-  const procentValue = calculateValueFromPercentage(price, percentage);
-  return price - procentValue;
-}
-
 export class ProductDetail {
   element: HTMLDivElement | null = null;
-  unsubscribe: () => void
-  
+  renderCount: number = 0;
+  unsubscribe: () => void;
+  rendered = false;
+
   constructor() {
     window.scrollTo({
       top: 0,
     });
     this.unsubscribe = store.subscribe(() => {
       if (isProductLoadingSelector() === false) {
+        if (this.rendered) {
+          return;
+        }
+        this.renderCount = this.renderCount + 1;
+
         this.render();
         this.renderProductStars();
         this.addGaleryListeners();
+        this.rendered = true;
       }
     });
   }
@@ -123,9 +114,45 @@ export class ProductDetail {
     productDetailStars.style.width = `${newWidth}px`;
   }
 
-  destroy() {
-    if (this.unsubscribe) {
-      this.unsubscribe(); 
+  // destroy() {
+  //   if (this.element) {
+  //     this.element.remove();
+  //     this.element = null;
+  //   }
+  //   if (this.unsubscribe) {
+  //     this.unsubscribe();
+  //   }
+  // }
+
+  addProductToCart() {
+    const productDetailCount = document.querySelector(".product-detail__count");
+    const productCount = Number(productDetailCount.textContent);
+
+    if (productCount > 1) {
+      const manyProducts = makeManyProducts(productCount);
+      store.dispatch(addManyProductsAction(manyProducts));
+      return;
+    }
+
+    store.dispatch(addProductAction(productDataSelector()));
+  }
+
+  tuneProductAmount(sign: "+" | "-") {
+    const productStock = productStockSelector();
+    const productDetailCount = document.querySelector(".product-detail__count");
+    const productCount = Number(productDetailCount.textContent);
+
+    if (sign === "+") {
+      if (Number(productCount) + 1 > productStock) {
+        return;
+      }
+      productDetailCount.innerHTML = String(Number(productCount) + 1);
+    }
+
+    if (sign === "-") {
+      if (productCount !== 1) {
+        productDetailCount.innerHTML = String(Number(productCount) - 1);
+      }
     }
   }
 
@@ -171,7 +198,7 @@ export class ProductDetail {
           <div class="product-detail__info__buttons">
             <div class="product-detail--count">
               <div class="product-detail--minus">-</div>
-              <div>1</div>
+              <div class="product-detail__count">1</div>
               <div class="product-detail--plus">+</div>
             </div>
             <div class="product-detail--submit">
@@ -190,6 +217,26 @@ export class ProductDetail {
     ]).render();
     page.append(navigation);
     page.append(productDetail);
+
+    if (productDetail.querySelector(".product-detail--submit")) {
+      productDetail
+        .querySelector(".product-detail--submit")
+        .addEventListener("click", this.addProductToCart.bind(this));
+
+      productDetail
+        .querySelector(".product-detail--plus")
+        .addEventListener("click", () => {
+          this.tuneProductAmount("+");
+        });
+
+      productDetail
+        .querySelector(".product-detail--minus")
+        .addEventListener("click", () => {
+          this.tuneProductAmount("-");
+        });
+    }
+
+    // productDetail.querySelector('.product-detail--submit').addEventListener('click',this.addProductToCart.bind(this))
 
     if (this.element) {
       this.element.replaceWith(page);
