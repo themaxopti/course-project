@@ -5,6 +5,9 @@ import {
   setIsDiscountHeaderExist,
 } from "../state/reducers/componentsProperties/componentsProperties.ts";
 import { store } from "../state/store.ts";
+// @ts-ignore
+import basketSvg from '../assets/header/basket.svg'
+
 
 export class Header {
   element: HTMLDivElement | null = null;
@@ -32,7 +35,7 @@ export class Header {
               <div class="logo-text">SHOP.CO</div>
             </div>
             <div class="header__icons">
-              <img class="header__icons__cart" src="/src/assets/header/basket.svg" alt="">
+              <img class="header__icons__cart" src="${basketSvg}" alt="">
               <img class="header__icons__profile" src="/src/assets/header/profile.svg" alt="">
             </div>
           </div>
