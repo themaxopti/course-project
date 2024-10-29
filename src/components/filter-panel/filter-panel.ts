@@ -4,6 +4,7 @@ import { createHTMLElement } from '../../utils/create-html-element';
 import ImgFilter from '../../assets/filters.svg';
 
 export class FilterPanel {
+  private filtersAll: HTMLElement;
   private container: HTMLElement;
   private overlay: HTMLElement;
   private brands: string[];
@@ -14,19 +15,21 @@ export class FilterPanel {
   private mobileToggle: HTMLElement;
 
   constructor(brands: string[], applyCallback: (brands: string[], priceRange: [number, number]) => void, resetCallback: () => void) {
+    this.filtersAll = createHTMLElement('div', ['all-folters']);
     this.brands = brands;
     this.onApplyFilter = applyCallback;
     this.onResetFilter = resetCallback;
     this.container = createHTMLElement('div', ['div-filter-panel']);
+    this.filtersAll.append(this.container);
 
     this.mobileToggle = createHTMLElement('img', ['img-filters-btn']);
     this.mobileToggle.setAttribute('src', ImgFilter);
     this.mobileToggle.addEventListener('click', () => this.toggleMobilePanel());
-    document.body.appendChild(this.mobileToggle);
+    this.filtersAll.append(this.mobileToggle);
 
     this.overlay = createHTMLElement('div', ['filter-overlay']);
     this.overlay.addEventListener('click', () => this.closeMobilePanel());
-    document.body.appendChild(this.overlay);
+    document.body.append(this.overlay);
   }
 
   private toggleMobilePanel(): void {
@@ -145,6 +148,6 @@ export class FilterPanel {
     this.container.append(this.createPriceFilter());
     this.container.append(this.createButtons());
 
-    return this.container;
+    return this.filtersAll;
   }
 }
