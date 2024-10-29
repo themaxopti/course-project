@@ -1,6 +1,4 @@
 import { createDiv } from "../../helpers/createHtmlTags";
-// import arrow from "../../assets/navigation/arrow.svg";
-// import arrow from "../../assets/navigation/arrow.svg";
 
 export class Navigation {
   element: HTMLDivElement | null = null;
@@ -16,13 +14,11 @@ export class Navigation {
       let routes: string[] | string = window.location.pathname;
       routes = routes.split("/");
       routes.shift();
-
       this.routes = routes.map((route) => {
         return route;
       });
       return;
     }
-    console.log("hi");
 
     this.routes = paths.map((path) => {
       return path;

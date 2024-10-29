@@ -7,26 +7,23 @@ import { ProductDetailPage } from "../pages/ProductDetail/ProductDetail.ts";
 import { CheckoutPage } from "../pages/Checkout/CheckoutPage.ts";
 import { PaymentPage } from "../pages/Payment/PaymentPage.ts";
 import { CategoryPage } from "../pages/Category/CategoryPage.ts";
-import { store } from "../state/store.ts";
-import {
-  setProductAction,
-  setProductLoadingAction,
-} from "../state/reducers/productReducer/productReducer.ts";
+import { CartPage } from "../pages/Cart/CartPage.ts";
+import { NotFoundPage } from "../pages/NotFound/NotFound.ts";
 
 export const router = new Navigo("/", {});
 
-let productDetailPage
+let productDetailPage;
 
 router.hooks({
   before: (done, params) => {
-    console.log(router.lastResolved());
     if (!router.lastResolved()) {
       return done();
     }
     if (router.lastResolved()[0].route.name === "product/:id") {
-      setTimeout(() => {
-        window.location.reload()
-      },1)
+      productDetailPage.destroy()
+      // setTimeout(() => {
+      //   window.location.reload();
+      // }, 1);
     }
     done();
   },
@@ -84,3 +81,15 @@ router.on("/category/:categoryName", function (obj) {
     .render()
     .then((data) => document.querySelector("#root")?.append(data));
 });
+
+router.on("/cart/:cartId", function (obj) {
+  const cartPage = new CartPage();
+  document.querySelector("#root")!.innerHTML = "";
+  document.querySelector("#root")?.append(cartPage.render());
+});
+
+router.notFound(function() {
+  document.querySelector("#root")!.innerHTML = "";
+  const notFoundPage = new NotFoundPage()
+  document.querySelector("#root")?.append(notFoundPage.render());
+})
