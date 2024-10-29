@@ -21,6 +21,8 @@ import {
   makeManyProducts,
 } from "../../state/reducers/cartReducer/cartReducer";
 import { calculatePercentage, calculateValueFromPercentage, makeDiscount } from "../../utils/product-utils";
+import starSvg from '../../assets/product-detail/Star 1.svg'
+
 
 export class ProductDetailImgages {
   element: HTMLDivElement;
@@ -169,11 +171,11 @@ export class ProductDetail {
           <div class="product-detail__info__title">${productTitleSelector()}</div>
           <div class="product-detail__info__mark">
             <div class="product-detail__info__stars">
-                <img src="/src/assets/product-detail/Star 1.svg" alt="">
-                <img src="/src/assets/product-detail/Star 1.svg" alt="">
-                <img src="/src/assets/product-detail/Star 1.svg" alt="">
-                <img src="/src/assets/product-detail/Star 1.svg" alt="">
-                <img src="/src/assets/product-detail/Star 1.svg" alt="">
+                <img src="${starSvg}" alt="">
+                <img src="${starSvg}" alt="">
+                <img src="${starSvg}" alt="">
+                <img src="${starSvg}" alt="">
+                <img src="${starSvg}" alt="">
             </div>
             <div>${productRatingSelector().toFixed(1)}/5</div>
           </div>

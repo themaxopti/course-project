@@ -1,4 +1,14 @@
 import { createDiv } from "../helpers/createHtmlTags";
+import visaSvg from '../assets/footer/visa.svg'
+import mastercardSvg from '../assets/footer/mastercard.svg'
+import applePaySvg from '../assets/footer/applepay.svg'
+import paypalSvg from '../assets/footer/paypal.svg'
+import googlePaySvg from '../assets/footer/googlepay.svg'
+import githubSvg from '../assets/footer/github.svg'
+import instagramSvg from '../assets/footer/instagram.svg'
+import faceBookSvg from '../assets/footer/facebook.svg'
+import twitterSvg from '../assets/footer/twitter.svg'
+
 
 const styledFooter = `
       <div class="container">
@@ -17,10 +27,10 @@ const styledFooter = `
               <div class="logo-text">SHOP.CO</div>
               <p>We have clothes that suits your style and which you’re proud to wear. From women to men.</p>
               <div class="footer__socials">
-                <img src="/src/assets/footer/twitter.svg" alt="">
-                <img src="/src/assets/footer/facebook.svg" alt="">
-                <img src="/src/assets/footer/instagram.svg" alt="">
-                <img src="/src/assets/footer/github.svg" alt="">
+                <img src="${twitterSvg}" alt="">
+                <img src="${faceBookSvg}" alt="">
+                <img src="${instagramSvg}" alt="">
+                <img src="${githubSvg}" alt="">
               </div>
             </div>
             <div class="footer__content__block">
@@ -63,11 +73,11 @@ const styledFooter = `
           <div class="footer__pay">
             <div class="footer__pay__desc">Shop.co © 2000-2023, All Rights Reserved</div>
             <div>
-              <img src="/src/assets/footer/visa.svg" alt="">
-              <img src="/src/assets/footer/mastercard.svg" alt="">
-              <img src="/src/assets/footer/paypal.svg" alt="">
-              <img src="/src/assets/footer/applepay.svg" alt="">
-              <img src="/src/assets/footer/googlepay.svg" alt="">
+              <img src="${visaSvg}" alt="">
+              <img src="${mastercardSvg}" alt="">
+              <img src="${paypalSvg}" alt="">
+              <img src="${applePaySvg}" alt="">
+              <img src="${googlePaySvg}" alt="">
             </div>
           </div>
       </div>
