@@ -3,11 +3,12 @@
   display: flex;
   gap: 20px;
   flex-direction: row;
-  padding: 27px 0 0 10px;
+  padding-top: 27px;
   margin: auto;
 }
 
 .h2-title-cards-block {
+  width: 80%;
   font-size: 36px;
   text-transform: capitalize;
   margin-bottom: 20px;

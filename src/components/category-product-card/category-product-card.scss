@@ -133,3 +133,13 @@
     }
   }
 }
+
+@media (max-width: 360px) {
+  .div-category-product-card {
+    width: 160px;
+
+    .div-img-container {
+      height: 164px;
+    }
+  }
+}
