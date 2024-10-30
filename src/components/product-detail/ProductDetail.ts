@@ -188,7 +188,7 @@ export class ProductDetail {
           </div>
           <div class="product-detail__info__price">
             <div><span class="product-detail--real-price">
-              $${makeDiscount(productPriceSelector(), productDiscountSelector()).toFixed(2)} 
+              $${makeDiscount(productPriceSelector(), Number(productDiscountSelector())).toFixed(2)} 
               <span class="product-detail__dicsount__price">$${productPriceSelector()}</span>
             </div>
             <div class="product-detail--discount">-${productDiscountSelector()}%</div>
