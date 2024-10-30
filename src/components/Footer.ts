@@ -100,13 +100,13 @@ export class Footer {
     this.element.appendChild(footer);
 
     setTimeout(() => {
-      Footer.subscribeToNewsletter();
+      Footer.subscribeToNewsletter().then();
     }, 500);
 
     return this.element;
   }
 
-  static subscribeToNewsletter() {
+  static async subscribeToNewsletter() {
     const subscriptionEmailInput = document.getElementById('subscription-email-input') as HTMLInputElement;
     const subscriptionEmailButton = document.getElementById('subscription-email-button') as HTMLButtonElement;
     const subscriptionForm = document.getElementById('footer__black-box__form') as HTMLDivElement;
@@ -132,17 +132,30 @@ export class Footer {
       }
     });
 
-    subscriptionEmailButton.addEventListener('click', () => {
+    subscriptionEmailButton.addEventListener('click', async () => {
       if (subscriptionEmailInput.value && Footer.validateEmail(subscriptionEmailInput.value)) {
-        store.dispatch(setIsSubscribed(true));
-        store.dispatch(setIsDiscountHeaderExist(false));
-        subscriptionForm.style.display = 'none';
-        subscriptionSuccess.style.display = 'block';
+        subscriptionEmailButton.innerText = 'Subscribing...';
+        Footer.mockSubscribeToNewsletter(subscriptionEmailInput.value).then(() => {
+          store.dispatch(setIsSubscribed(true));
+          store.dispatch(setIsDiscountHeaderExist(false));
+          subscriptionEmailButton.innerText = 'Subscribe to Newsletter';
+          subscriptionForm.style.display = 'none';
+          subscriptionSuccess.style.display = 'block';
+        })
       }
     });
   }
 
   static validateEmail(email: string) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
+
+  static async mockSubscribeToNewsletter(email: string) {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        console.log('Subscribe to newsletter for email:', email);
+        resolve(true);
+      }, 2000);
+    });
   }
 }
