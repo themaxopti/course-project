@@ -116,16 +116,6 @@ export class ProductDetail {
     productDetailStars.style.width = `${newWidth}px`;
   }
 
-  // destroy() {
-  //   if (this.element) {
-  //     this.element.remove();
-  //     this.element = null;
-  //   }
-  //   if (this.unsubscribe) {
-  //     this.unsubscribe();
-  //   }
-  // }
-
   addProductToCart() {
     const productDetailCount = document.querySelector(".product-detail__count");
     const productCount = Number(productDetailCount.textContent);
@@ -184,7 +174,7 @@ export class ProductDetail {
               $${makeDiscount(productPriceSelector(), productDiscountSelector()).toFixed(2)} 
               <span class="product-detail__dicsount__price">$${productPriceSelector()}</span>
             </div>
-            <div class="product-detail--discount">-${productDiscountSelector().toFixed(0)}%</div>
+            <div class="product-detail--discount">-${productDiscountSelector()}%</div>
           </div>
           <div class="product-detail__info__desc">
            ${productDescriptionSelector()}

@@ -2,7 +2,10 @@ import { ProductType } from "../../../types/requestHandlers.types";
 import { RootState, store } from "../../store";
 import { v4 } from "uuid";
 import { productDataSelector } from "../productReducer/productReducer";
-import { calculatePercentage, makeDiscount } from "../../../utils/product-utils";
+import {
+  calculatePercentage,
+  makeDiscount,
+} from "../../../utils/product-utils";
 
 export interface InitialState {
   products: ProductType[] | null;
@@ -12,12 +15,14 @@ export interface InitialState {
 type ActionType =
   | AddProductActionType
   | DeleteProductActionType
-  | AddManyProductsActionType;
+  | AddManyProductsActionType
+  | CleanCartActionType;
 
 enum CartActionTitle {
   ADD_PRODUCT = "ADD_PRODUCT",
   DELETE_PRODUCT = "DELETE_PRODUCT",
   ADD_MANY_PRODUCTS = "ADD_MANY_PRODUCTS",
+  CLEAN_CART = "CLEAN_CART",
 }
 
 type AddManyProductsActionType = {
@@ -35,6 +40,10 @@ type DeleteProductActionType = {
   payload: { id: string };
 };
 
+type CleanCartActionType = {
+  type: CartActionTitle.CLEAN_CART;
+};
+
 export const addManyProductsAction = (payload: ProductType[]) => {
   return { type: CartActionTitle.ADD_MANY_PRODUCTS, payload };
 };
@@ -45,6 +54,10 @@ export const addProductAction = (payload: ProductType) => {
 
 export const deleteProductAction = (payload: { id: string }) => {
   return { type: CartActionTitle.DELETE_PRODUCT, payload };
+};
+
+export const cleanCartAction = () => {
+  return { type: CartActionTitle.CLEAN_CART };
 };
 
 const initialState: InitialState = {
@@ -77,6 +90,9 @@ export const cartReducer = (
         (el) => el.id !== action.payload.id
       );
       return { ...state, products: newProducts };
+
+    case CartActionTitle.CLEAN_CART:
+      return { ...state, products: [] };
     default:
       return state;
   }

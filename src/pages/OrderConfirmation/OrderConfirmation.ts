@@ -5,17 +5,19 @@ import { PageBaseClass } from "../PageBaseClass.ts";
 
 export class OrderConfirmationPage extends PageBaseClass {
   children: [Navigation, OrderConfirmation];
+  timeout: ReturnType<typeof setTimeout>;
+
+  destroy() {
+    clearTimeout(this.timeout);
+  }
 
   constructor() {
     super([document.createDocumentFragment()]);
-    this.children = [
-      new Navigation(),
-      new OrderConfirmation(),
-    ] as any;
+    this.children = [new Navigation(), new OrderConfirmation()] as any;
 
-    setTimeout(() => {
-      router.navigate('/')
-    }, 5000)
+    this.timeout = setTimeout(() => {
+      router.navigate("/");
+    }, 5000);
 
     this.children.forEach((child) => {
       this.page.appendChild(child.render());
