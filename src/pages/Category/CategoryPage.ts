@@ -44,7 +44,7 @@ export class CategoryPage extends PageBaseClass {
   }
 
 
-  async renderCards(brandsFilter: string[] = [], price: number[] = [10, 20000000]) {
+  async renderCards(brandsFilter: string[] = [], price: number[] = [0, 20000000]) {
 
    this.cardsBlock.innerHTML = '';
 

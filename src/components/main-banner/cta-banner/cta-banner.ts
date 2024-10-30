@@ -15,12 +15,12 @@ export class CtaBanner {
     descriptionBanner.textContent = BANNERINFO.description;
     this.node.append(descriptionBanner);
 
-    const btnBanner = createHTMLElement('button', ['btn-banner']);
     const linkBtn = createHTMLElement('a', ['a-link-anchor']);
+    const btnBanner = createHTMLElement('button', ['btn-banner']);
     linkBtn.setAttribute('href', '#targetBlock');
-    linkBtn.textContent = BANNERINFO.button;
-    this.node.append(btnBanner);
-    btnBanner.append(linkBtn);
+    btnBanner.textContent = BANNERINFO.button;
+    this.node.append(linkBtn);
+    linkBtn.append(btnBanner);
 
     const infoNumbersBlock = createHTMLElement('div', ['div-info-numbers-block']);
     this.node.append(infoNumbersBlock);
