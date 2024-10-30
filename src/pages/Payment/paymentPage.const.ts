@@ -13,11 +13,12 @@ export const formOptions: FormOptionsModel = {
       formatter: "card",
       textContent: "Card Number",
       validationRules: [
-        { regex: /^.{3,}$/, message: "First Name has at least 3 characters" },
+        { regex: /^.{3,32}$/, message: "Card number must be between 3 and 32 characters long" },
       ],
     },
     {
       type: InputEnum.TEXT,
+      formatter: "cardExpire",
       textContent: "Card Expire",
       validationRules: [
         { regex: /^.{3,}$/, message: "Last Name has at least 3 characters" },

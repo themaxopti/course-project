@@ -16,7 +16,7 @@ export interface FormFieldModel {
   textContent?: string;
   addDivider?: boolean;
   validationRules?: FormFieldValidationRule[];
-  formatter?: 'card' | 'phone';
+  formatter?: 'card' | 'phone' | 'cardExpire';
   value?: string;
 }
 
