@@ -19,7 +19,7 @@ export class CheckoutPage extends PageBaseClass {
     h1.classList.add("container")
 
     this.container = document.createElement("div");
-    this.container.append(new Navigation().render())
+    this.container.append(new Navigation(['checkout']).render())
     this.container.append(h1);
     this.container.classList.add("checkout-page__content");
     this.page.append(this.container);

@@ -36,7 +36,9 @@ router.on("/", function () {
   document.querySelector("#root")?.append(mainPage.render());
 });
 
-router.on("/test", function () {
+router.on("/test", function (params) {
+  console.log(params);
+  
   const testPage = new TestPage();
   document.querySelector("#root")!.innerHTML = "";
   document.querySelector("#root")?.append(testPage.render());
@@ -55,7 +57,6 @@ router.on("/order-confirmation", function () {
 });
 
 router.on("/product/:id", function (params) {
-  // window.location.reload()
   productDetailPage = new ProductDetailPage(params.data.id);
   document.querySelector("#root")!.innerHTML = "";
   document.querySelector("#root")?.append(productDetailPage.render());

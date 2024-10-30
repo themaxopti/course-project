@@ -18,11 +18,16 @@ import {
 import {
   addManyProductsAction,
   addProductAction,
+  cartProductsSelector,
   makeManyProducts,
 } from "../../state/reducers/cartReducer/cartReducer";
-import { calculatePercentage, calculateValueFromPercentage, makeDiscount } from "../../utils/product-utils";
-import starSvg from '../../assets/product-detail/Star 1.svg'
-
+import {
+  calculatePercentage,
+  calculateValueFromPercentage,
+  makeDiscount,
+} from "../../utils/product-utils";
+import starSvg from "../../assets/product-detail/Star 1.svg";
+import { requestHandlers } from "../../utils/requestHandlers";
 
 export class ProductDetailImgages {
   element: HTMLDivElement;
@@ -33,8 +38,8 @@ export class ProductDetailImgages {
     ]) as HTMLDivElement;
 
     images.forEach((image, i) => {
-      if(i === 3){
-        return
+      if (i === 3) {
+        return;
       }
       const img = document.createElement("img");
       img.setAttribute("src", image);
@@ -116,9 +121,21 @@ export class ProductDetail {
     productDetailStars.style.width = `${newWidth}px`;
   }
 
-  addProductToCart() {
+  async addProductToCart() {
     const productDetailCount = document.querySelector(".product-detail__count");
     const productCount = Number(productDetailCount.textContent);
+
+    if (cartProductsSelector().length === 0) {
+      await requestHandlers.addCart({
+        userId: store.getState().user.id || 1,
+        products: makeManyProducts(productCount),
+      });
+    } else {
+      await requestHandlers.updateCart(
+        store.getState().user.id || 1,
+        makeManyProducts(productCount)
+      );
+    }
 
     if (productCount > 1) {
       const manyProducts = makeManyProducts(productCount);

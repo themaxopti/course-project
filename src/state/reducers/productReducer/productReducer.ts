@@ -1,4 +1,3 @@
-import { createSelector } from "reselect";
 import { ProductType } from "../../../types/requestHandlers.types";
 import { requestHandlers } from "../../../utils/requestHandlers";
 import { RootState, store } from "../../store";
@@ -94,9 +93,6 @@ export const productDescriptionSelector = () =>
   store.getState().product.data.description;
 export const productTitleSelector = () => store.getState().product.data.title;
 export const productPriceSelector = () => store.getState().product.data.price;
-
-// export const productDiscountSelector = () =>
-//   store.getState().product.data.discountPercentage;
 
 export const productDiscount = (state: RootState) => {
   const discount = state.product.data.discountPercentage;

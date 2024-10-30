@@ -8,7 +8,7 @@ import githubSvg from '../assets/footer/github.svg'
 import instagramSvg from '../assets/footer/instagram.svg'
 import faceBookSvg from '../assets/footer/facebook.svg'
 import twitterSvg from '../assets/footer/twitter.svg'
-
+import convertSvg from '../assets/footer/cover.svg'
 
 const styledFooter = `
       <div class="container">
@@ -16,7 +16,7 @@ const styledFooter = `
               <div class="footer__black-box__title">STAY UPTO DATE ABOUT <br> OUR LATEST OFFERS</div>
               <div class="footer__black-box__form">
                 <div>
-                  <img src="/src/assets/footer/cover.svg" alt="">
+                  <img src="${convertSvg}" alt="">
                   <input placeholder="Enter your email address" type="text">
                 </div>
                 <div>Subscribe to Newsletter</div>

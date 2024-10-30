@@ -10,7 +10,7 @@ import { store } from "../../state/store";
 
 export class ProductDetailPage {
   element: HTMLDivElement | null = null;
-  children: [Header, Navigation, OrderConfirmation, Footer];
+  children: [Header, Navigation, ProductDetail, Footer];
   productDetail: ProductDetail;
 
   constructor(productId: string) {

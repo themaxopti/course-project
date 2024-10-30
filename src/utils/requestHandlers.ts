@@ -1,5 +1,5 @@
 import { ENV } from "../../env.ts";
-import axios, { Axios, AxiosResponse } from "axios";
+import axios, { AxiosResponse } from "axios";
 import { store } from "../state/store.ts";
 import { setUser } from "../state/actions/user/userActions.ts";
 import { router } from "../router/router.ts";
@@ -7,8 +7,6 @@ import { Category } from "../components/main-categories/category-api.model.ts";
 import { createHTMLElement } from "./create-html-element.ts";
 import { ProductType } from "../types/requestHandlers.types.ts";
 import { cleanCartAction } from "../state/reducers/cartReducer/cartReducer.ts";
-
-const api = axios.create({ url: ENV.BASE_URL });
 
 export const requestHandlers = {
   signIn: async (username: string, password: string) => {
@@ -65,12 +63,37 @@ export const requestHandlers = {
     return await axios.get<ProductType>(`${ENV.BASE_URL}products/${id}`);
   },
 
+  getCart: async (id: number): Promise<AxiosResponse<ProductType>> => {
+    return await axios.get<ProductType>(`${ENV.BASE_URL}carts/${id}`);
+  },
+
+  addCart: async (payload: {
+    userId: number;
+    products: ProductType[];
+  }): Promise<AxiosResponse<ProductType>> => {
+    return await axios.post<ProductType>(`${ENV.BASE_URL}carts/add`, payload);
+  },
+
+  deleteCart: async (id: string): Promise<AxiosResponse<ProductType>> => {
+    return await axios.delete(`${ENV.BASE_URL}carts/${id}`);
+  },
+
+  updateCart: async (
+    id,
+    payload: ProductType[]
+  ): Promise<AxiosResponse<ProductType>> => {
+    return await axios.put<ProductType>(`${ENV.BASE_URL}carts/${id}`, {
+      merge: true,
+      products: payload,
+    });
+  },
+
   checkout: () => {
     router.navigate("/payment");
   },
 
   payment: () => {
-    store.dispatch(cleanCartAction())
+    store.dispatch(cleanCartAction());
     router.navigate("/order-confirmation");
   },
 
