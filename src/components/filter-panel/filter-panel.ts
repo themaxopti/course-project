@@ -43,12 +43,16 @@ export class FilterPanel {
     title.textContent = 'Brands';
     brandContainer.append(title);
 
-    this.brands.forEach(brand => {
-      const brandElement = createHTMLElement('div', ['div-brand-item']);
-      brandElement.textContent = brand;
-      brandElement.addEventListener('click', () => this.toggleBrand(brand, brandElement));
-      brandContainer.append(brandElement);
-    });
+    if (this.brands.length === 0) {
+      brandContainer.textContent = 'No available brands for sorting';
+    } else {
+      this.brands.forEach(brand => {
+        const brandElement = createHTMLElement('div', ['div-brand-item']);
+        brandElement.textContent = brand;
+        brandElement.addEventListener('click', () => this.toggleBrand(brand, brandElement));
+        brandContainer.append(brandElement);
+      });
+    }
 
     return brandContainer;
   }
