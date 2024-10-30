@@ -86,7 +86,7 @@ export class ProductDetail {
     const images: NodeListOf<HTMLImageElement> =
       document.querySelectorAll<HTMLImageElement>(".product-detail__image");
 
-    images.forEach((div, i) => {
+    images.forEach((div) => {
       div.addEventListener("click", () => {
         if (div.classList.contains("product-detail__image--active")) {
           return;
@@ -227,8 +227,6 @@ export class ProductDetail {
           this.tuneProductAmount("-");
         });
     }
-
-    // productDetail.querySelector('.product-detail--submit').addEventListener('click',this.addProductToCart.bind(this))
 
     if (this.element) {
       this.element.replaceWith(page);

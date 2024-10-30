@@ -14,6 +14,18 @@ import crossSvg from '../assets/Vector.svg'
 export class Header {
   element: HTMLDivElement | null = null;
 
+  constructor() {
+    store.subscribe(() => {
+      if (!isDiscountHeaderExist()) {
+        const discountHeader: HTMLDivElement =
+          document.querySelector(".discount-header");
+        if (discountHeader) {
+          discountHeader.style.display = "none";
+        }
+      }
+    })
+  }
+
   render() {
     const header = createDiv(
       `

@@ -22,10 +22,6 @@ export class Cart {
     store.subscribe(() => {
       this.render();
     });
-
-    console.log(
-      cartProductsSelector()
-    )
   }
 
   render() {

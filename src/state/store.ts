@@ -6,7 +6,7 @@ import { thunk } from "redux-thunk";
 import { productReducer } from "./reducers/productReducer/productReducer";
 import { orderSummaryReducer } from "./reducers/orderSummaryReducer.ts";
 import { cartReducer } from "./reducers/cartReducer/cartReducer.ts";
-import { componetsPropertiesReducer } from "./reducers/componentsProperties/componentsProperties.ts";
+import { componentsPropertiesReducer } from "./reducers/componentsProperties/componentsProperties.ts";
 import storage from "redux-persist/lib/storage";
 import { persistReducer, persistStore } from "redux-persist";
 
@@ -23,14 +23,14 @@ const rootReducer = combineReducers({
   product: productReducer,
   orderSummary: orderSummaryReducer,
   cart: persistedCartReducer,
-  componetsProperties: componetsPropertiesReducer,
+  componetsProperties: componentsPropertiesReducer,
 });
 
 export const store = createStore(
   rootReducer,
   composeWithDevTools(applyMiddleware(thunk))
 );
-const persistor = persistStore(store);
 
-// store.getState
+persistStore(store);
+
 export type RootState = ReturnType<typeof store.getState>;

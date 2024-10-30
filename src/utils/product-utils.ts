@@ -1,24 +1,20 @@
-export function calculatePercentage(max, min) {
+export function calculatePercentage(max: number, min: number) {
   if (min > max) {
-    throw new Error("Младшее число не может быть больше старшего числа.");
+    throw new Error("The smaller number cannot be greater than the larger number.");
   }
 
-  const percentage = (min / max) * 100;
-
-  return percentage;
+  return (min / max) * 100;
 }
 
-export function calculateValueFromPercentage(number, percentage) {
+export function calculateValueFromPercentage(number: number, percentage: number) {
   if (percentage < 0 || percentage > 100) {
-    throw new Error("Процент должен быть в диапазоне от 0 до 100.");
+    throw new Error("Percentage must be between 0 and 100.");
   }
 
-  const value = (percentage / 100) * number;
-
-  return value;
+  return (percentage / 100) * number;
 }
 
-export function makeDiscount(price, percentage) {
-  const procentValue = calculateValueFromPercentage(price, percentage);
-  return price - procentValue;
+export function makeDiscount(price: number, percentage: number) {
+  const percentValue = calculateValueFromPercentage(price, percentage);
+  return price - percentValue;
 }
