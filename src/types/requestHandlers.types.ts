@@ -7,7 +7,7 @@ interface Dimensions {
 interface Review {
   rating: number;
   comment: string;
-  date: string; // Дату оставим как строку, но можно преобразовать её в тип Date при необходимости
+  date: string;
   reviewerName: string;
   reviewerEmail: string;
 }

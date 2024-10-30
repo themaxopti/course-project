@@ -8,18 +8,24 @@ import githubSvg from '../assets/footer/github.svg'
 import instagramSvg from '../assets/footer/instagram.svg'
 import faceBookSvg from '../assets/footer/facebook.svg'
 import twitterSvg from '../assets/footer/twitter.svg'
-import convertSvg from '../assets/footer/cover.svg'
+import cover from '../assets/footer/cover.svg'
+import { store } from "../state/store.ts";
+import { setIsSubscribed } from "../state/actions/orderSummaryActions.ts";
+import { setIsDiscountHeaderExist } from "../state/reducers/componentsProperties/componentsProperties.ts";
 
 const styledFooter = `
       <div class="container">
           <div class="footer__black-box">
-              <div class="footer__black-box__title">STAY UPTO DATE ABOUT <br> OUR LATEST OFFERS</div>
-              <div class="footer__black-box__form">
+              <div class="footer__black-box__title">STAY UPTO DATE ABOUT<br>OUR LATEST OFFERS</div>
+              <div class="footer__black-box__form" id="footer__black-box__form" style="display: none">
                 <div>
-                  <img src="${convertSvg}" alt="">
-                  <input placeholder="Enter your email address" type="text">
+                  <img src=${cover}>
+                  <input placeholder="Enter your email address" id="subscription-email-input" type="text">
                 </div>
-                <div>Subscribe to Newsletter</div>
+                <button id="subscription-email-button" type="button" class="footer__black-box__button">Subscribe to Newsletter</button>
+              </div>
+              <div class="footer__black-box__success" id="footer__black-box__success" style="display: none">
+                <p>🎉 Success! You've subscribed to our newsletter.</p>
               </div>
           </div>
           <div class="footer__content">
@@ -91,8 +97,65 @@ export class Footer {
   render() {
     this.element = document.createDocumentFragment();
     const footer = createDiv(styledFooter, "wrapper footer");
-    
     this.element.appendChild(footer);
+
+    setTimeout(() => {
+      Footer.subscribeToNewsletter().then();
+    }, 500);
+
     return this.element;
+  }
+
+  static async subscribeToNewsletter() {
+    const subscriptionEmailInput = document.getElementById('subscription-email-input') as HTMLInputElement;
+    const subscriptionEmailButton = document.getElementById('subscription-email-button') as HTMLButtonElement;
+    const subscriptionForm = document.getElementById('footer__black-box__form') as HTMLDivElement;
+    const subscriptionSuccess = document.getElementById('footer__black-box__success') as HTMLDivElement;
+
+    const isSubscribed = store.getState().orderSummary.isSubscribed;
+    if (isSubscribed) {
+      store.dispatch(setIsDiscountHeaderExist(false));
+      subscriptionForm.style.display = 'none';
+      subscriptionSuccess.style.display = 'block';
+      return;
+    } else {
+      subscriptionForm.style.display = 'flex';
+      subscriptionSuccess.style.display = 'none';
+    }
+
+    subscriptionEmailInput.addEventListener('input', () => {
+      if (subscriptionEmailInput.value
+        && Footer.validateEmail(subscriptionEmailInput.value)) {
+        subscriptionEmailInput.parentElement.style.border = 'none';
+      } else {
+        subscriptionEmailInput.parentElement.style.border = '2px solid red';
+      }
+    });
+
+    subscriptionEmailButton.addEventListener('click', async () => {
+      if (subscriptionEmailInput.value && Footer.validateEmail(subscriptionEmailInput.value)) {
+        subscriptionEmailButton.innerText = 'Subscribing...';
+        Footer.mockSubscribeToNewsletter(subscriptionEmailInput.value).then(() => {
+          store.dispatch(setIsSubscribed(true));
+          store.dispatch(setIsDiscountHeaderExist(false));
+          subscriptionEmailButton.innerText = 'Subscribe to Newsletter';
+          subscriptionForm.style.display = 'none';
+          subscriptionSuccess.style.display = 'block';
+        })
+      }
+    });
+  }
+
+  static validateEmail(email: string) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
+
+  static async mockSubscribeToNewsletter(email: string) {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        console.log('Subscribe to newsletter for email:', email);
+        resolve(true);
+      }, 2000);
+    });
   }
 }

@@ -19,23 +19,23 @@
     padding: 32px 0;
   }
 
-  .btn-banner {
-    max-width: 210px;
+  .a-link-anchor {
     color: #ffffff;
-    font-size: 16px;
-    background-color: #000000;
-    border: none;
-    border-radius: 100px;
-    padding: 17px 0;
+    text-decoration: none;
 
-    &:hover {
-      cursor: pointer;
-      transform: scale(1.1);
-    }
-
-    .a-link-anchor {
+    .btn-banner {
+      max-width: 210px;
       color: #ffffff;
-      text-decoration: none;
+      font-size: 16px;
+      background-color: #000000;
+      border: none;
+      border-radius: 100px;
+      padding: 17px 67px;
+  
+      &:hover {
+        cursor: pointer;
+        transform: scale(1.1);
+      }
     }
   }
 

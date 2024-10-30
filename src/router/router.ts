@@ -16,7 +16,7 @@ let productDetailPage;
 let orderConfirmationPage: OrderConfirmationPage;
 
 router.hooks({
-  before: (done, params) => {
+  before: (done) => {
     if (!router.lastResolved()) {
       return done();
     }
@@ -84,7 +84,7 @@ router.on("/category/:categoryName", function (obj) {
     .then((data) => document.querySelector("#root")?.append(data));
 });
 
-router.on("/cart/:cartId", function (obj) {
+router.on("/cart/:cartId", function () {
   const cartPage = new CartPage();
   document.querySelector("#root")!.innerHTML = "";
   document.querySelector("#root")?.append(cartPage.render());

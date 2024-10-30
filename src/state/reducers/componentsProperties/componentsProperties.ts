@@ -26,7 +26,7 @@ const initialState: InitialState = {
   discountHeader: true,
 };
 
-export const componetsPropertiesReducer = (
+export const componentsPropertiesReducer = (
   state = initialState,
   action: ActionType
 ): InitialState => {
