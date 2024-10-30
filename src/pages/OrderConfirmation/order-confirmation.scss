@@ -1,7 +1,6 @@
 .order-confirmation {
   margin-top: 20px !important;
   margin-bottom: 100px !important;
-  //   margin: 1000px 0px 0px 0px;
   display: flex;
   flex-direction: column;
   row-gap: 20px;
@@ -9,7 +8,7 @@
   font-weight: 700;
 
   &__title {
-    font-family: "Poppins";
+    font-family: "Poppins", serif;
     font-size: 60px;
     @media (max-width: 626px) {
       font-size: 32px;
@@ -18,7 +17,7 @@
 
   .confirm-message {
     line-height: 22px;
-    font-family: "Rubik";
+    font-family: "Rubik", serif;
     color: #00000099;
     border-radius: 20px;
     max-width: 715px;

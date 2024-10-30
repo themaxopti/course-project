@@ -16,7 +16,7 @@
 
 @import "../pages/Category/category-page.scss";
 @import "../components/category-product-card/category-product-card.scss";
-@import "../components//filter-panel//filter-panel.scss";
+@import "../components/filter-panel/filter-panel.scss";
 @import "../components/checkout/order-summary.scss";
 
 @import "../components/Navigation/navigation.scss";
@@ -68,7 +68,7 @@ body {
 }
 
 .logo-text {
-  font-family: "Poppins";
+  font-family: "Poppins", serif;
   font-size: 32px;
   font-weight: 700;
   @media (max-width: 400px) {

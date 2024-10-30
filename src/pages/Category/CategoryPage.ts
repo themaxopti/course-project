@@ -89,6 +89,7 @@ export class CategoryPage extends PageBaseClass {
     filtersContainer.prepend(filterPanel.render());
   }
 
+  // @ts-ignore
   async render() {
     this.appendHeaderAndFooter();
     await this.renderCards();

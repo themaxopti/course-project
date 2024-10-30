@@ -1,11 +1,7 @@
-import { Footer } from "../../components/Footer";
-import { Header } from "../../components/Header";
-import { Navigation } from "../../components/Navigation/Navigation";
 import { createContainer } from "../../helpers/createHtmlTags";
 
 export class OrderConfirmation {
   element: HTMLDivElement | null = null;
-  children: [Header, Navigation, Footer];
 
   constructor() {}
 
