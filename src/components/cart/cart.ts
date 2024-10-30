@@ -2,11 +2,7 @@ import { createContainer } from "../../helpers/createHtmlTags";
 import { router } from "../../router/router";
 import {
   cartProductsSelector,
-  deleteProductAction,
-  discountProcentSelector,
-  discountValueSelector,
-  subTotalSelector,
-  totalSelector,
+  deleteProductAction
 } from "../../state/reducers/cartReducer/cartReducer";
 import { store } from "../../state/store";
 import { OrderSummary } from "../checkout/order-summary";
@@ -15,9 +11,7 @@ const checkoutButton = {
   buttonText: "Go to checkout",
   buttonAction: (e) => {
     e.preventDefault();
-    const form = document.querySelector("#payment-form") as HTMLFormElement;
     router.navigate("/checkout");
-    form.requestSubmit();
   },
 };
 
@@ -28,13 +22,20 @@ export class Cart {
     store.subscribe(() => {
       this.render();
     });
+
+    console.log(
+      cartProductsSelector()
+    )
   }
 
   render() {
     const cart = createContainer(
       `
       <h1>Your cart</h1>
-      <div class="cart__container">
+      <div class="cart__empty ${cartProductsSelector().length === 0 ? '' : 'cart__container--no-display'}">
+          Your cart is empty
+      </div>
+      <div class="cart__container ${cartProductsSelector().length === 0 ? 'cart__container--no-display' : ''}">
             <div class="cart__products">
             ${cartProductsSelector()
               .map((product) => {

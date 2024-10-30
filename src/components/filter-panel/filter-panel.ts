@@ -70,6 +70,7 @@ export class FilterPanel {
     priceContainer.append(title);
 
     const slider = createHTMLElement('div', ['div-slider']) as target;
+    slider.id = "slider-round";
     const minPriceLabel = createHTMLElement('span', ['span-label-slider']);
     const maxPriceLabel = createHTMLElement('span', ['span-label-slider']);
 
@@ -88,7 +89,7 @@ export class FilterPanel {
     });
 
     const sliderInstance = slider.noUiSlider;
-    
+
     if (sliderInstance) {
       sliderInstance.on('update', (values: (string | number)[]) => {
         this.priceRange = [parseInt(values[0].toString()), parseInt(values[1].toString())];
