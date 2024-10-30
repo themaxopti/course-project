@@ -56,16 +56,29 @@ export class Input {
         this.formatCard();
       } else if (formatter === "phone") {
         this.formatPhone();
+      } else if (formatter === 'cardExpire') {
+        this.formatCardExpire();
       }
     });
   }
 
+
   formatCard() {
-    const value = this.node.value.replace(/\D/g, "");
-    this.node.value = value.replace(/(\d{1,4})/g, (_, p1) => {
-      return p1 + (p1.length % 4 === 0 ? " " : "");
-    });
+    let value = this.node.value.replace(/\D/g, "").trim();
+    value = value.replace(/(.{4})/g, "$1 ").trim();
+
+    this.node.value = value;
     this.realValue = value.replace(/\s/g, "");
+  }
+
+  formatCardExpire() {
+    let value = this.node.value.replace(/\D/g, "").trim();
+    if (value.length > 2) {
+      value = value.slice(0, 2) + "/" + value.slice(2);
+    }
+    value = value.slice(0, 5);
+    this.node.value = value;
+    this.realValue = value.replace("/", "");
   }
 
   formatPhone() {
