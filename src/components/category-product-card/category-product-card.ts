@@ -59,14 +59,10 @@ export class CategoryProductCard {
     const discountedPriceElement = createHTMLElement('span', ['span-product-price', 'span-discounted-price']);
     discountedPriceElement.textContent = `$${discountedPrice.toFixed(2)}`;
 
-    console.log(+discountedPrice.toFixed(2));
-    console.log(this.price);
-
     const isVisibleElement = +discountedPrice.toFixed(2) === this.price;
     
     priceContainer.append(discountedPriceElement);
     if (!isVisibleElement) {
-      console.log('visible')
       priceContainer.append(originalPriceElement);
       priceContainer.append(discountElement);
     }
