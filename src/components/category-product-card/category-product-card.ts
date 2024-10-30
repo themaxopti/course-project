@@ -52,17 +52,25 @@ export class CategoryProductCard {
     originalPriceElement.textContent = `$${this.price.toFixed(2)}`;
     
     const discountElement = createHTMLElement('span', ['span-product-discount']);
-    discountElement.textContent = `-${this.discountPercentage.toFixed(0)}%`;
+    const visiblePercentage = this.discountPercentage > 1 ? this.discountPercentage.toFixed(0) : this.discountPercentage.toFixed(2);
+    discountElement.textContent = `-${visiblePercentage}%`;
     
     const discountedPrice = this.price * (1 - this.discountPercentage / 100);
     const discountedPriceElement = createHTMLElement('span', ['span-product-price', 'span-discounted-price']);
     discountedPriceElement.textContent = `$${discountedPrice.toFixed(2)}`;
+
+    console.log(+discountedPrice.toFixed(2));
+    console.log(this.price);
+
+    const isVisibleElement = +discountedPrice.toFixed(2) === this.price;
     
     priceContainer.append(discountedPriceElement);
-    priceContainer.append(originalPriceElement);
-    priceContainer.append(discountElement);
+    if (!isVisibleElement) {
+      console.log('visible')
+      priceContainer.append(originalPriceElement);
+      priceContainer.append(discountElement);
+    }
     infoContainer.append(priceContainer);
-
     this.node.append(infoContainer);
   }
 
