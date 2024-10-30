@@ -117,9 +117,13 @@ const subTotal = (state: RootState) => {
 };
 export const subTotalSelector = () => subTotal(store.getState());
 
-const discountProcent = (state: RootState) => {
-  const totalValue = total(state);
+const discountPercent = (state: RootState) => {
+  let totalValue = total(state);
   const subTotalValue = subTotal(state);
+
+  if (store.getState().orderSummary.isSubscribed) {
+    totalValue = totalValue - totalValue * 0.2;
+  }
 
   const discountValue = subTotalValue - totalValue;
   if (discountValue === 0) {
@@ -128,7 +132,7 @@ const discountProcent = (state: RootState) => {
 
   return calculatePercentage(subTotalValue, discountValue).toFixed(2);
 };
-export const discountProcentSelector = () => discountProcent(store.getState());
+export const discountPercentSelector = () => discountPercent(store.getState());
 
 const discountPercentage = (state: RootState) => {
   const value = state.cart.products.reduce((acc, product) => {
@@ -144,7 +148,7 @@ const discountValue = (state: RootState) => {
 };
 export const discountValueSelector = () => discountValue(store.getState());
 
-export function makeManyProducts(count): ProductType[] {
+export function makeManyProducts(count: number): ProductType[] {
   const products = [];
   for (let i = 0; i < count; i++) {
     const product = productDataSelector();

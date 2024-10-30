@@ -1,7 +1,7 @@
 import { store } from "../../state/store.ts";
 // @ts-ignore
 import ButtonArrow from "../../assets/payment/button-arrow.svg";
-import { discountProcentSelector, discountValueSelector, subTotalSelector, totalSelector } from "../../state/reducers/cartReducer/cartReducer.ts";
+import { discountPercentSelector, discountValueSelector, subTotalSelector, totalSelector } from "../../state/reducers/cartReducer/cartReducer.ts";
 
 interface SummaryButton {
   buttonText: string;
@@ -14,7 +14,7 @@ export class OrderSummary {
   constructor(button: SummaryButton) {
     this.container = document.createElement("div");
     this.container.classList.add("order-summary__container");
-    
+
     this.orderSummaryChanged(button);
     store.subscribe(() => {
       this.orderSummaryChanged(button);
@@ -22,23 +22,21 @@ export class OrderSummary {
   }
 
   orderSummaryChanged(button: SummaryButton) {
-    const state = store.getState().orderSummary;
-    this.generateOrderSummary(state.subtotal, state.isDiscount, button);
+    this.generateOrderSummary(button);
   }
 
   render() {
     return this.container;
   }
 
-  generateOrderSummary(subtotal: number, discount: boolean, button: SummaryButton) {
-    const d = +discount;
+  generateOrderSummary(button: SummaryButton) {
     this.container.innerHTML = `
       <h2>Order Summary</h2>
       <div class="order-summary__line">
         <span class="text--grey">Subtotal</span><span class="text--bold">$${subTotalSelector()}</span>
       </div>
       <div class="order-summary__line divider">
-        <span class="text--grey">Discount (-${discountProcentSelector()}%)</span><span class="text--bold text--red">-$${discountValueSelector()}</span>
+        <span class="text--grey">Discount (-${discountPercentSelector()}%)</span><span class="text--bold text--red">-$${discountValueSelector()}</span>
       </div>
       <div class="order-summary__line">
         <span>Total</span><span class="text--bold text--big">$${totalSelector()}</span>
