@@ -39,19 +39,19 @@ export class Cart {
             ${cartProductsSelector()
               .map((product) => {
                 return `
-               <div class="cart__product">
-                    <div class="cart__product__image">
-                        <img src="${product.images[0]}" />
-                    </div>
-                    <div class="cart__product__info">
-                        <div>${product.title}</div>
-                        <div class="cart__product__price">
-                            <div>$${product.price}</div>
-                            ${product.discountPercentage !== 0 && `<span class="span-product-discount">-${product.discountPercentage.toFixed(0)}%</span>`} 
-                            <span data-id="${product.id}" class="span-product-discount delete">delete</span>
+                  <div class="cart__product">
+                        <div class="cart__product__image">
+                            <img src="${product.images[0]}" />
                         </div>
-                    </div>
-                </div>
+                        <div class="cart__product__info">
+                            <div>${product.title}</div>
+                            <div class="cart__product__price">
+                                <div>$${product.price}</div>
+                                ${product.discountPercentage !== 0 && `<span class="span-product-discount">-${product.discountPercentage > 1 ?  product.discountPercentage.toFixed(0) : product.discountPercentage.toFixed(2)}%</span>`} 
+                                <span data-id="${product.id}" class="span-product-discount delete">delete</span>
+                            </div>
+                        </div>
+                   </div>
               `;
               })
               .join(" ")}

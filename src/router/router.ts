@@ -13,6 +13,7 @@ import { NotFoundPage } from "../pages/NotFound/NotFound.ts";
 export const router = new Navigo("/", {});
 
 let productDetailPage;
+let orderConfirmationPage: OrderConfirmationPage;
 
 router.hooks({
   before: (done, params) => {
@@ -20,10 +21,10 @@ router.hooks({
       return done();
     }
     if (router.lastResolved()[0].route.name === "product/:id") {
-      productDetailPage.destroy()
-      // setTimeout(() => {
-      //   window.location.reload();
-      // }, 1);
+      productDetailPage.destroy();
+    }
+    if (router.lastResolved()[0].route.name === "order-confirmation") {
+      orderConfirmationPage.destroy();
     }
     done();
   },
@@ -48,7 +49,7 @@ router.on("/sign-in", function () {
 });
 
 router.on("/order-confirmation", function () {
-  const orderConfirmationPage = new OrderConfirmationPage();
+  orderConfirmationPage = new OrderConfirmationPage();
   document.querySelector("#root")!.innerHTML = "";
   document.querySelector("#root")?.append(orderConfirmationPage.render());
 });
@@ -88,8 +89,8 @@ router.on("/cart/:cartId", function (obj) {
   document.querySelector("#root")?.append(cartPage.render());
 });
 
-router.notFound(function() {
+router.notFound(function () {
   document.querySelector("#root")!.innerHTML = "";
-  const notFoundPage = new NotFoundPage()
+  const notFoundPage = new NotFoundPage();
   document.querySelector("#root")?.append(notFoundPage.render());
-})
+});

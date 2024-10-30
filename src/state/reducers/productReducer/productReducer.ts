@@ -1,6 +1,7 @@
+import { createSelector } from "reselect";
 import { ProductType } from "../../../types/requestHandlers.types";
 import { requestHandlers } from "../../../utils/requestHandlers";
-import { store } from "../../store";
+import { RootState, store } from "../../store";
 
 export interface InitialState {
   data: ProductType | null;
@@ -93,8 +94,20 @@ export const productDescriptionSelector = () =>
   store.getState().product.data.description;
 export const productTitleSelector = () => store.getState().product.data.title;
 export const productPriceSelector = () => store.getState().product.data.price;
-export const productDiscountSelector = () =>
-  store.getState().product.data.discountPercentage;
+
+// export const productDiscountSelector = () =>
+//   store.getState().product.data.discountPercentage;
+
+export const productDiscount = (state: RootState) => {
+  const discount = state.product.data.discountPercentage;
+  if (discount < 1) {
+    return discount.toFixed(2);
+  }
+  return discount;
+};
+
+export const productDiscountSelector = () => productDiscount(store.getState());
+
 export const productImagesSelector = () => store.getState().product.data.images;
 export const productCategorySelector = () =>
   store.getState().product.data.category;

@@ -6,6 +6,7 @@ import { router } from "../router/router.ts";
 import { Category } from "../components/main-categories/category-api.model.ts";
 import { createHTMLElement } from "./create-html-element.ts";
 import { ProductType } from "../types/requestHandlers.types.ts";
+import { cleanCartAction } from "../state/reducers/cartReducer/cartReducer.ts";
 
 const api = axios.create({ url: ENV.BASE_URL });
 
@@ -69,6 +70,7 @@ export const requestHandlers = {
   },
 
   payment: () => {
+    store.dispatch(cleanCartAction())
     router.navigate("/order-confirmation");
   },
 
