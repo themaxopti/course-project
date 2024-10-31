@@ -1,4 +1,5 @@
-import { createStore, combineReducers } from "redux";
+import { createStore, combineReducers, applyMiddleware } from "redux";
+import { thunk } from "redux-thunk";
 import { userReducer } from "./reducers/userReducer/userReducer";
 import { productReducer } from "./reducers/productReducer/productReducer";
 import { orderSummaryReducer } from "./reducers/orderSummaryReducer.ts";
@@ -22,7 +23,10 @@ const rootReducer = combineReducers({
   componetsProperties: componentsPropertiesReducer,
 });
 
-export const store = createStore(rootReducer);
+export const store = createStore(
+  rootReducer,
+  applyMiddleware(thunk)
+);
 
 persistStore(store);
 
