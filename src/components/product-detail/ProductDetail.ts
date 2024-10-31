@@ -18,6 +18,7 @@ import {
 import {
   addManyProductsAction,
   addProductAction,
+  cartProductsSelector,
   makeManyProducts,
 } from "../../state/reducers/cartReducer/cartReducer";
 import {
@@ -26,6 +27,7 @@ import {
   makeDiscount,
 } from "../../utils/product-utils";
 import starSvg from "../../assets/product-detail/Star 1.svg";
+import { requestHandlers } from "../../utils/requestHandlers";
 
 export class ProductDetailImgages {
   element: HTMLDivElement;
@@ -119,9 +121,21 @@ export class ProductDetail {
     productDetailStars.style.width = `${newWidth}px`;
   }
 
-  addProductToCart() {
+  async addProductToCart() {
     const productDetailCount = document.querySelector(".product-detail__count");
     const productCount = Number(productDetailCount.textContent);
+
+    if (cartProductsSelector().length === 0) {
+      await requestHandlers.addCart({
+        userId: store.getState().user.id || 1,
+        products: makeManyProducts(productCount),
+      });
+    } else {
+      await requestHandlers.updateCart(
+        store.getState().user.id || 1,
+        makeManyProducts(productCount)
+      );
+    }
 
     if (productCount > 1) {
       const manyProducts = makeManyProducts(productCount);
@@ -174,7 +188,7 @@ export class ProductDetail {
           </div>
           <div class="product-detail__info__price">
             <div><span class="product-detail--real-price">
-              $${makeDiscount(productPriceSelector(), productDiscountSelector()).toFixed(2)} 
+              $${makeDiscount(productPriceSelector(), Number(productDiscountSelector())).toFixed(2)} 
               <span class="product-detail__dicsount__price">$${productPriceSelector()}</span>
             </div>
             <div class="product-detail--discount">-${productDiscountSelector()}%</div>

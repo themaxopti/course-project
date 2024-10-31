@@ -6,7 +6,7 @@ import { router } from "../router/router.ts";
 import { Category } from "../components/main-categories/category-api.model.ts";
 import { createHTMLElement } from "./create-html-element.ts";
 import { ProductType } from "../types/requestHandlers.types.ts";
-import { cleanCartAction } from "../state/reducers/cartReducer/cartReducer.ts";
+import { cartIdSelector, cleanCartAction } from "../state/reducers/cartReducer/cartReducer.ts";
 
 export const requestHandlers = {
   signIn: async (username: string, password: string) => {
@@ -20,7 +20,7 @@ export const requestHandlers = {
       localStorage.setItem("refreshToken", data.refreshToken);
       data.userType = "limited";
       store.dispatch(setUser(data));
-      router.navigate("/checkout");
+      router.navigate(`/checkout/${cartIdSelector() || 1}`);
     } catch (error) {
       console.error(error);
       const errorMessage =
@@ -63,8 +63,33 @@ export const requestHandlers = {
     return await axios.get<ProductType>(`${ENV.BASE_URL}products/${id}`);
   },
 
+  getCart: async (id: number): Promise<AxiosResponse<ProductType>> => {
+    return await axios.get<ProductType>(`${ENV.BASE_URL}carts/${id}`);
+  },
+
+  addCart: async (payload: {
+    userId: number;
+    products: ProductType[];
+  }): Promise<AxiosResponse<ProductType>> => {
+    return await axios.post<ProductType>(`${ENV.BASE_URL}carts/add`, payload);
+  },
+
+  deleteCart: async (id: string): Promise<AxiosResponse<ProductType>> => {
+    return await axios.delete(`${ENV.BASE_URL}carts/${id}`);
+  },
+
+  updateCart: async (
+    id,
+    payload: ProductType[]
+  ): Promise<AxiosResponse<ProductType>> => {
+    return await axios.put<ProductType>(`${ENV.BASE_URL}carts/${id}`, {
+      merge: true,
+      products: payload,
+    });
+  },
+
   checkout: () => {
-    router.navigate("/payment");
+    router.navigate(`/payment/${cartIdSelector() || 1}`);
   },
 
   payment: () => {

@@ -94,9 +94,6 @@ export const productDescriptionSelector = () =>
 export const productTitleSelector = () => store.getState().product.data.title;
 export const productPriceSelector = () => store.getState().product.data.price;
 
-// export const productDiscountSelector = () =>
-//   store.getState().product.data.discountPercentage;
-
 export const productDiscount = (state: RootState) => {
   const discount = state.product.data.discountPercentage;
   if (discount < 1) {

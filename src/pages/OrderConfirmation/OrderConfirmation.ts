@@ -13,7 +13,10 @@ export class OrderConfirmationPage extends PageBaseClass {
 
   constructor() {
     super([document.createDocumentFragment()]);
-    this.children = [new Navigation(), new OrderConfirmation()];
+    this.children = [
+      new Navigation(["order-confirmation"]),
+      new OrderConfirmation(),
+    ];
 
     this.timeout = setTimeout(() => {
       router.navigate("/");

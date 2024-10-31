@@ -29,6 +29,7 @@ export const formOptions: FormOptionsModel = {
     },
     {
       type: InputEnum.TEXT,
+      formatter: "cardIban",
       textContent: "IBAN",
       validationRules: [
         { regex: /^.{3,}$/, message: "Maiden Name has at least 3 characters" },

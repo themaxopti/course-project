@@ -19,7 +19,7 @@ export class PaymentPage extends PageBaseClass {
     h1.classList.add("container");
 
     this.container = document.createElement("div");
-    this.container.append(new Navigation().render());
+    this.container.append(new Navigation(['payment']).render());
     this.container.append(h1);
     this.container.classList.add("payment-page__content");
     this.page.append(this.container);

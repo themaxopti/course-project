@@ -1,17 +1,19 @@
 import { createContainer } from "../../helpers/createHtmlTags";
 import { router } from "../../router/router";
 import {
+  cartIdSelector,
   cartProductsSelector,
   deleteProductAction,
 } from "../../state/reducers/cartReducer/cartReducer";
 import { store } from "../../state/store";
+import { requestHandlers } from "../../utils/requestHandlers";
 import { OrderSummary } from "../checkout/order-summary";
 
 const checkoutButton = {
   buttonText: "Go to checkout",
   buttonAction: (e) => {
     e.preventDefault();
-    router.navigate("/checkout");
+    router.navigate(`/checkout/${cartIdSelector() || 1}`);
   },
 };
 
@@ -63,6 +65,14 @@ export class Cart {
       .forEach((deleteButton: HTMLSpanElement) => {
         deleteButton.addEventListener("click", () => {
           store.dispatch(deleteProductAction({ id: deleteButton.dataset.id }));
+          if (cartProductsSelector().length === 0) {
+            setTimeout(async () => {
+              router.navigate("/");
+              await requestHandlers.deleteCart(
+                store.getState().user.id || 1,
+              );
+            }, 1000);
+          }
         });
       });
 
