@@ -2,7 +2,7 @@ import { createContainer } from "../../helpers/createHtmlTags";
 import { router } from "../../router/router";
 import {
   cartProductsSelector,
-  deleteProductAction
+  deleteProductAction,
 } from "../../state/reducers/cartReducer/cartReducer";
 import { store } from "../../state/store";
 import { OrderSummary } from "../checkout/order-summary";
@@ -28,10 +28,10 @@ export class Cart {
     const cart = createContainer(
       `
       <h1>Your cart</h1>
-      <div class="cart__empty ${cartProductsSelector().length === 0 ? '' : 'cart__container--no-display'}">
+      <div class="cart__empty ${cartProductsSelector().length === 0 ? "" : "cart__container--no-display"}">
           Your cart is empty
       </div>
-      <div class="cart__container ${cartProductsSelector().length === 0 ? 'cart__container--no-display' : ''}">
+      <div class="cart__container ${cartProductsSelector().length === 0 ? "cart__container--no-display" : ""}">
             <div class="cart__products">
             ${cartProductsSelector()
               .map((product) => {
@@ -44,7 +44,7 @@ export class Cart {
                             <div>${product.title}</div>
                             <div class="cart__product__price">
                                 <div>$${product.price}</div>
-                                ${product.discountPercentage !== 0 && `<span class="span-product-discount">-${product.discountPercentage > 1 ?  product.discountPercentage.toFixed(0) : product.discountPercentage.toFixed(2)}%</span>`} 
+                                ${product.discountPercentage !== 0 && `<span class="span-product-discount">-${product.discountPercentage > 1 ? product.discountPercentage.toFixed(0) : product.discountPercentage.toFixed(2)}%</span>`} 
                                 <span data-id="${product.id}" class="span-product-discount delete">delete</span>
                             </div>
                         </div>

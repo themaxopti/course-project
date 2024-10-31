@@ -13,7 +13,7 @@
     width: 100%;
     height: 285px;
     border-radius: 20px;
-    background-color: #F0EEED;
+    background-color: #f0eeed;
     overflow: hidden;
 
     .img-product-card {
@@ -34,7 +34,6 @@
       overflow: hidden;
       text-overflow: ellipsis;
       margin: 0 0 5px;
-
     }
 
     .p-product-brand {
@@ -62,14 +61,13 @@
 
       .span-product-discount {
         background-color: #f7d7d7;
-        color: #FF3333;
+        color: #ff3333;
         font-size: 12px;
         font-weight: 500;
         padding: 7px 10px;
         border-radius: 50px;
         margin-right: 10px;
       }
-
     }
 
     .div-product-rating {
@@ -88,7 +86,7 @@
           display: inline-block;
 
           &::before {
-            content: '★';
+            content: "★";
           }
 
           &.full {
@@ -97,15 +95,15 @@
 
           &.half {
             position: relative;
-            
+
             &::before {
               color: #ddd;
-              content: '★';
+              content: "★";
             }
 
             &::after {
               color: #ffc107;
-              content: '★';
+              content: "★";
               position: absolute;
               left: 0;
               width: 50%;

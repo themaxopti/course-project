@@ -1,6 +1,5 @@
 import { createDiv } from "../../helpers/createHtmlTags";
-import arrowSwg from '../../assets/navigation/arrow.svg'
-
+import arrowSwg from "../../assets/navigation/arrow.svg";
 
 export class Navigation {
   element: HTMLDivElement | null = null;
@@ -20,8 +19,6 @@ export class Navigation {
     this.routes = paths.map((path) => {
       return path;
     });
-
-
   }
 
   render() {

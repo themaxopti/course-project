@@ -5,11 +5,10 @@ import {
   setIsDiscountHeaderExist,
 } from "../state/reducers/componentsProperties/componentsProperties.ts";
 import { store } from "../state/store.ts";
-import basketSvg from '../assets/header/basket.svg'
-import burgerSvg from '../assets/header/basket.svg'
-import profileSvg from '../assets/header/profile.svg'
-import crossSvg from '../assets/Vector.svg'
-
+import basketSvg from "../assets/header/basket.svg";
+import burgerSvg from "../assets/header/basket.svg";
+import profileSvg from "../assets/header/profile.svg";
+import crossSvg from "../assets/Vector.svg";
 
 export class Header {
   element: HTMLDivElement | null = null;
@@ -23,7 +22,7 @@ export class Header {
           discountHeader.style.display = "none";
         }
       }
-    })
+    });
   }
 
   render() {

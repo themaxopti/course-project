@@ -38,4 +38,5 @@ export const componentsPropertiesReducer = (
   }
 };
 
-export const isDiscountHeaderExist = () => store.getState().componetsProperties.discountHeader;
+export const isDiscountHeaderExist = () =>
+  store.getState().componetsProperties.discountHeader;

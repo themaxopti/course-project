@@ -8,7 +8,6 @@ export class CartPage {
   children: [Header, Navigation, Cart, Footer];
 
   constructor() {
-
     this.children = [
       new Header(),
       new Navigation(["cart"]),

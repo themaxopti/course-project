@@ -32,11 +32,14 @@ export class Form {
     }
 
     if (options.submit.handlerName) {
-      this.node.addEventListener("submit", this.handleSubmit.bind(this, options.submit));
+      this.node.addEventListener(
+        "submit",
+        this.handleSubmit.bind(this, options.submit)
+      );
     }
   }
 
-  private setFormError(message: string = 'Something went wrong. Try again.') {
+  private setFormError(message: string = "Something went wrong. Try again.") {
     this.removeFormError();
     const errorNode = document.createElement("span");
     errorNode.classList.add("login-form__error-message");
@@ -51,7 +54,7 @@ export class Form {
     }
   }
 
-  private async sendForm(submit: { handlerName: string, sendId?: string[] }) {
+  private async sendForm(submit: { handlerName: string; sendId?: string[] }) {
     try {
       const values = submit.sendId.map((id) => {
         const input = this.fields.find((field) => field.node.id === id);
@@ -82,7 +85,10 @@ export class Form {
     return valid;
   }
 
-  private async handleSubmit(submit: { handlerName: string, sendId?: string[] }, event: Event) {
+  private async handleSubmit(
+    submit: { handlerName: string; sendId?: string[] },
+    event: Event
+  ) {
     event.preventDefault();
     if (this.validateFields()) {
       try {

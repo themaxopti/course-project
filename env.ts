@@ -1,3 +1,3 @@
 export const ENV = {
-    BASE_URL: "https://dummyjson.com/"
-}
+  BASE_URL: "https://dummyjson.com/",
+};

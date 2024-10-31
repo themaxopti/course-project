@@ -68,7 +68,7 @@ export const requestHandlers = {
   },
 
   payment: () => {
-    store.dispatch(cleanCartAction())
+    store.dispatch(cleanCartAction());
     router.navigate("/order-confirmation");
   },
 

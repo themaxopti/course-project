@@ -2,7 +2,6 @@ import globals from "globals";
 import pluginJs from "@eslint/js";
 import tseslint from "typescript-eslint";
 
-
 export default [
   { files: ["**/*.{js,mjs,cjs,ts}"] },
   { languageOptions: { globals: globals.browser } },
@@ -12,6 +11,6 @@ export default [
     rules: {
       "no-case-declarations": "off",
       "@typescript-eslint/no-explicit-any": "off",
-    }
-  }
+    },
+  },
 ];

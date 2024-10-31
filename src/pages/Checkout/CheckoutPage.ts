@@ -16,10 +16,10 @@ export class CheckoutPage extends PageBaseClass {
 
     const h1 = document.createElement("h1");
     h1.textContent = "Checkout";
-    h1.classList.add("container")
+    h1.classList.add("container");
 
     this.container = document.createElement("div");
-    this.container.append(new Navigation().render())
+    this.container.append(new Navigation().render());
     this.container.append(h1);
     this.container.classList.add("checkout-page__content");
     this.page.append(this.container);
@@ -31,7 +31,7 @@ export class CheckoutPage extends PageBaseClass {
 
   async prepopulateForm() {
     let user = store.getState().user;
-    if (user.userType !== 'full') {
+    if (user.userType !== "full") {
       await requestHandlers.getUser();
       user = store.getState().user;
       if (!user.USER_LOGGED) {
@@ -53,7 +53,10 @@ export class CheckoutPage extends PageBaseClass {
         field.value = user.address.address;
       } else if (field.textContent === "City" && user.address.city) {
         field.value = user.address.city;
-      } else if (field.textContent === "Postal Code" && user.address.postalCode) {
+      } else if (
+        field.textContent === "Postal Code" &&
+        user.address.postalCode
+      ) {
         field.value = user.address.postalCode;
       }
     });
@@ -65,7 +68,7 @@ export class CheckoutPage extends PageBaseClass {
     block.classList.add("checkout-page__block");
     block.classList.add("container");
 
-    const form = new Form(formOptions).render()
+    const form = new Form(formOptions).render();
     form.id = "checkout-form";
     form.classList.add("checkout-form");
     block.append(form);

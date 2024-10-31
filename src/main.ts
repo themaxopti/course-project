@@ -1,10 +1,9 @@
-import './styles/style.scss'
-import { router } from './router/router'
+import "./styles/style.scss";
+import { router } from "./router/router";
 import { requestHandlers } from "./utils/requestHandlers.ts";
 
-
 async function bootstrap() {
-  const token = localStorage.getItem('access_token');
+  const token = localStorage.getItem("access_token");
   if (token) {
     try {
       await requestHandlers.getUser();
@@ -17,5 +16,4 @@ async function bootstrap() {
   }
 }
 
-await bootstrap()
-
+await bootstrap();

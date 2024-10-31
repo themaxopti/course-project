@@ -1,5 +1,8 @@
 import { InputEnum } from "./InputEnum.ts";
-import { FormFieldModel, FormFieldValidationRule } from "../form/FormOptions.model.ts";
+import {
+  FormFieldModel,
+  FormFieldValidationRule,
+} from "../form/FormOptions.model.ts";
 
 export class Input {
   readonly container: HTMLElement;
@@ -56,12 +59,11 @@ export class Input {
         this.formatCard();
       } else if (formatter === "phone") {
         this.formatPhone();
-      } else if (formatter === 'cardExpire') {
+      } else if (formatter === "cardExpire") {
         this.formatCardExpire();
       }
     });
   }
-
 
   formatCard() {
     let value = this.node.value.replace(/\D/g, "").trim();
@@ -83,14 +85,17 @@ export class Input {
 
   formatPhone() {
     const value = this.node.value.replace(/\D/g, "").replace(/-/g, "");
-    this.node.value = value.replace(/(\d{1,2})(\d{1,3})(\d{1,3})(\d{1,4})/, (_, p1, p2, p3, p4) => {
-      let result = "";
-      if (p1) result += `+${p1}`;
-      if (p2) result += ` ${p2}`;
-      if (p3) result += ` ${p3}`;
-      if (p4) result += ` ${p4}`;
-      return result;
-    });
+    this.node.value = value.replace(
+      /(\d{1,2})(\d{1,3})(\d{1,3})(\d{1,4})/,
+      (_, p1, p2, p3, p4) => {
+        let result = "";
+        if (p1) result += `+${p1}`;
+        if (p2) result += ` ${p2}`;
+        if (p3) result += ` ${p3}`;
+        if (p4) result += ` ${p4}`;
+        return result;
+      }
+    );
     this.realValue = value.replace(/\s/g, "");
   }
 

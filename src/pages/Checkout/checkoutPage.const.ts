@@ -12,14 +12,20 @@ export const formOptions: FormOptionsModel = {
       type: InputEnum.TEXT,
       textContent: "First Name",
       validationRules: [
-        { regex: /^[A-Za-z]{3,32}$/, message: "First name must be between 3 and 32 letters" },
+        {
+          regex: /^[A-Za-z]{3,32}$/,
+          message: "First name must be between 3 and 32 letters",
+        },
       ],
     },
     {
       type: InputEnum.TEXT,
       textContent: "Last Name",
       validationRules: [
-        { regex: /^[A-Za-z]{3,32}$/, message: "Last name must be between 3 and 32 letters" },
+        {
+          regex: /^[A-Za-z]{3,32}$/,
+          message: "Last name must be between 3 and 32 letters",
+        },
       ],
     },
     {
@@ -27,15 +33,20 @@ export const formOptions: FormOptionsModel = {
       textContent: "Maiden Name",
       addDivider: true,
       validationRules: [
-        { regex: /^[A-Za-z]{3,32}$/, message: "Last name must be between 3 and 32 letters" },
+        {
+          regex: /^[A-Za-z]{3,32}$/,
+          message: "Last name must be between 3 and 32 letters",
+        },
       ],
     },
     {
       type: InputEnum.EMAIL,
       textContent: "Email",
       validationRules: [
-        { regex: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/,
-          message: "Use real email like example@example.com" },
+        {
+          regex: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/,
+          message: "Use real email like example@example.com",
+        },
       ],
     },
     {
@@ -44,8 +55,11 @@ export const formOptions: FormOptionsModel = {
       formatter: "phone",
       addDivider: true,
       validationRules: [
-        { regex: /^\+?[0-9]{1,3}?[-\s.]?[0-9]{3}[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/,
-          message: "Incorrect phone number" },
+        {
+          regex:
+            /^\+?[0-9]{1,3}?[-\s.]?[0-9]{3}[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/,
+          message: "Incorrect phone number",
+        },
       ],
     },
     {
@@ -63,8 +77,8 @@ export const formOptions: FormOptionsModel = {
         { regex: /^.{3,}$/, message: "Postal Code has at least 3 characters" },
       ],
     },
-  ]
-}
+  ],
+};
 
 export const summaryButton = {
   buttonText: "Go to Payment",

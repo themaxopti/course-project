@@ -1,6 +1,11 @@
 import { store } from "../../state/store.ts";
 import ButtonArrow from "../../assets/payment/button-arrow.svg";
-import { discountPercentSelector, discountValueSelector, subTotalSelector, totalSelector } from "../../state/reducers/cartReducer/cartReducer.ts";
+import {
+  discountPercentSelector,
+  discountValueSelector,
+  subTotalSelector,
+  totalSelector,
+} from "../../state/reducers/cartReducer/cartReducer.ts";
 
 interface SummaryButton {
   buttonText: string;
@@ -45,6 +50,8 @@ export class OrderSummary {
         <img src=${ButtonArrow} alt="Arrow"/>
       </button>
     `;
-    this.container.querySelector("#summary-button")?.addEventListener("click", button.buttonAction);
+    this.container
+      .querySelector("#summary-button")
+      ?.addEventListener("click", button.buttonAction);
   }
 }

@@ -22,9 +22,7 @@ const rootReducer = combineReducers({
   componetsProperties: componentsPropertiesReducer,
 });
 
-export const store = createStore(
-  rootReducer
-);
+export const store = createStore(rootReducer);
 
 persistStore(store);
 

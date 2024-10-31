@@ -1,14 +1,14 @@
 import { createDiv } from "../helpers/createHtmlTags";
-import visaSvg from '../assets/footer/visa.svg'
-import mastercardSvg from '../assets/footer/mastercard.svg'
-import applePaySvg from '../assets/footer/applepay.svg'
-import paypalSvg from '../assets/footer/paypal.svg'
-import googlePaySvg from '../assets/footer/googlepay.svg'
-import githubSvg from '../assets/footer/github.svg'
-import instagramSvg from '../assets/footer/instagram.svg'
-import faceBookSvg from '../assets/footer/facebook.svg'
-import twitterSvg from '../assets/footer/twitter.svg'
-import cover from '../assets/footer/cover.svg'
+import visaSvg from "../assets/footer/visa.svg";
+import mastercardSvg from "../assets/footer/mastercard.svg";
+import applePaySvg from "../assets/footer/applepay.svg";
+import paypalSvg from "../assets/footer/paypal.svg";
+import googlePaySvg from "../assets/footer/googlepay.svg";
+import githubSvg from "../assets/footer/github.svg";
+import instagramSvg from "../assets/footer/instagram.svg";
+import faceBookSvg from "../assets/footer/facebook.svg";
+import twitterSvg from "../assets/footer/twitter.svg";
+import cover from "../assets/footer/cover.svg";
 import { store } from "../state/store.ts";
 import { setIsSubscribed } from "../state/actions/orderSummaryActions.ts";
 import { setIsDiscountHeaderExist } from "../state/reducers/componentsProperties/componentsProperties.ts";
@@ -107,41 +107,56 @@ export class Footer {
   }
 
   static async subscribeToNewsletter() {
-    const subscriptionEmailInput = document.getElementById('subscription-email-input') as HTMLInputElement;
-    const subscriptionEmailButton = document.getElementById('subscription-email-button') as HTMLButtonElement;
-    const subscriptionForm = document.getElementById('footer__black-box__form') as HTMLDivElement;
-    const subscriptionSuccess = document.getElementById('footer__black-box__success') as HTMLDivElement;
+    const subscriptionEmailInput = document.getElementById(
+      "subscription-email-input"
+    ) as HTMLInputElement;
+    const subscriptionEmailButton = document.getElementById(
+      "subscription-email-button"
+    ) as HTMLButtonElement;
+    const subscriptionForm = document.getElementById(
+      "footer__black-box__form"
+    ) as HTMLDivElement;
+    const subscriptionSuccess = document.getElementById(
+      "footer__black-box__success"
+    ) as HTMLDivElement;
 
     const isSubscribed = store.getState().orderSummary.isSubscribed;
     if (isSubscribed) {
       store.dispatch(setIsDiscountHeaderExist(false));
-      subscriptionForm.style.display = 'none';
-      subscriptionSuccess.style.display = 'block';
+      subscriptionForm.style.display = "none";
+      subscriptionSuccess.style.display = "block";
       return;
     } else {
-      subscriptionForm.style.display = 'flex';
-      subscriptionSuccess.style.display = 'none';
+      subscriptionForm.style.display = "flex";
+      subscriptionSuccess.style.display = "none";
     }
 
-    subscriptionEmailInput.addEventListener('input', () => {
-      if (subscriptionEmailInput.value
-        && Footer.validateEmail(subscriptionEmailInput.value)) {
-        subscriptionEmailInput.parentElement.style.border = 'none';
+    subscriptionEmailInput.addEventListener("input", () => {
+      if (
+        subscriptionEmailInput.value &&
+        Footer.validateEmail(subscriptionEmailInput.value)
+      ) {
+        subscriptionEmailInput.parentElement.style.border = "none";
       } else {
-        subscriptionEmailInput.parentElement.style.border = '2px solid red';
+        subscriptionEmailInput.parentElement.style.border = "2px solid red";
       }
     });
 
-    subscriptionEmailButton.addEventListener('click', async () => {
-      if (subscriptionEmailInput.value && Footer.validateEmail(subscriptionEmailInput.value)) {
-        subscriptionEmailButton.innerText = 'Subscribing...';
-        Footer.mockSubscribeToNewsletter(subscriptionEmailInput.value).then(() => {
-          store.dispatch(setIsSubscribed(true));
-          store.dispatch(setIsDiscountHeaderExist(false));
-          subscriptionEmailButton.innerText = 'Subscribe to Newsletter';
-          subscriptionForm.style.display = 'none';
-          subscriptionSuccess.style.display = 'block';
-        })
+    subscriptionEmailButton.addEventListener("click", async () => {
+      if (
+        subscriptionEmailInput.value &&
+        Footer.validateEmail(subscriptionEmailInput.value)
+      ) {
+        subscriptionEmailButton.innerText = "Subscribing...";
+        Footer.mockSubscribeToNewsletter(subscriptionEmailInput.value).then(
+          () => {
+            store.dispatch(setIsSubscribed(true));
+            store.dispatch(setIsDiscountHeaderExist(false));
+            subscriptionEmailButton.innerText = "Subscribe to Newsletter";
+            subscriptionForm.style.display = "none";
+            subscriptionSuccess.style.display = "block";
+          }
+        );
       }
     });
   }
@@ -153,7 +168,7 @@ export class Footer {
   static async mockSubscribeToNewsletter(email: string) {
     return new Promise((resolve) => {
       setTimeout(() => {
-        console.log('Subscribe to newsletter for email:', email);
+        console.log("Subscribe to newsletter for email:", email);
         resolve(true);
       }, 2000);
     });

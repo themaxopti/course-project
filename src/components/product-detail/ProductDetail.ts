@@ -20,9 +20,12 @@ import {
   addProductAction,
   makeManyProducts,
 } from "../../state/reducers/cartReducer/cartReducer";
-import { calculatePercentage, calculateValueFromPercentage, makeDiscount } from "../../utils/product-utils";
-import starSvg from '../../assets/product-detail/Star 1.svg'
-
+import {
+  calculatePercentage,
+  calculateValueFromPercentage,
+  makeDiscount,
+} from "../../utils/product-utils";
+import starSvg from "../../assets/product-detail/Star 1.svg";
 
 export class ProductDetailImgages {
   element: HTMLDivElement;
@@ -33,8 +36,8 @@ export class ProductDetailImgages {
     ]) as HTMLDivElement;
 
     images.forEach((image, i) => {
-      if(i === 3){
-        return
+      if (i === 3) {
+        return;
       }
       const img = document.createElement("img");
       img.setAttribute("src", image);

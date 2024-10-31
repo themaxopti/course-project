@@ -1,7 +1,7 @@
 export enum InputEnum {
-  TEXT = 'text',
+  TEXT = "text",
   USERNAME = InputEnum.TEXT,
-  PASSWORD = 'password',
-  SUBMIT = 'submit',
-  EMAIL = 'email',
+  PASSWORD = "password",
+  SUBMIT = "submit",
+  EMAIL = "email",
 }

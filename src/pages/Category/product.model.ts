@@ -8,24 +8,24 @@ export type Review = {
 
 export type Product = {
   id: number;
-  title: string,
+  title: string;
   description: string;
-  category: string,
-  price: number,
-  discountPercentage: number,
-  rating: number,
-  stock: number,
-  tags: string[],
-  brand: string,
+  category: string;
+  price: number;
+  discountPercentage: number;
+  rating: number;
+  stock: number;
+  tags: string[];
+  brand: string;
   dimensions: {
-    width: number,
-    height: number,
-    depth: number
-  },
-  warrantyInformation: string,
-  shippingInformation: string,
-  availabilityStatus: string,
-  reviews: Review[],
+    width: number;
+    height: number;
+    depth: number;
+  };
+  warrantyInformation: string;
+  shippingInformation: string;
+  availabilityStatus: string;
+  reviews: Review[];
   returnPolicy: string;
   minimumOrderQuantity: number;
   meta: {
@@ -36,4 +36,4 @@ export type Product = {
   };
   images: string[];
   thumbnail: string;
-}
+};

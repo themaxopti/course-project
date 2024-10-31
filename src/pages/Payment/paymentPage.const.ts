@@ -13,7 +13,10 @@ export const formOptions: FormOptionsModel = {
       formatter: "card",
       textContent: "Card Number",
       validationRules: [
-        { regex: /^.{3,32}$/, message: "Card number must be between 3 and 32 characters long" },
+        {
+          regex: /^.{3,32}$/,
+          message: "Card number must be between 3 and 32 characters long",
+        },
       ],
     },
     {
@@ -30,9 +33,9 @@ export const formOptions: FormOptionsModel = {
       validationRules: [
         { regex: /^.{3,}$/, message: "Maiden Name has at least 3 characters" },
       ],
-    }
-  ]
-}
+    },
+  ],
+};
 
 export const summaryButton = {
   buttonText: "Place an Order",

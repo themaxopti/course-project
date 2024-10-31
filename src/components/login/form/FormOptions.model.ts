@@ -4,9 +4,9 @@ export interface FormOptionsModel {
   title?: string;
   fields: FormFieldModel[];
   submit?: {
-    textContent?: string,
-    handlerName?: string,
-    sendId?: string[],
+    textContent?: string;
+    handlerName?: string;
+    sendId?: string[];
   };
 }
 
@@ -16,7 +16,7 @@ export interface FormFieldModel {
   textContent?: string;
   addDivider?: boolean;
   validationRules?: FormFieldValidationRule[];
-  formatter?: 'card' | 'phone' | 'cardExpire';
+  formatter?: "card" | "phone" | "cardExpire";
   value?: string;
 }
 
