@@ -6,7 +6,7 @@ import { router } from "../router/router.ts";
 import { Category } from "../components/main-categories/category-api.model.ts";
 import { createHTMLElement } from "./create-html-element.ts";
 import { ProductType } from "../types/requestHandlers.types.ts";
-import { cleanCartAction } from "../state/reducers/cartReducer/cartReducer.ts";
+import { cartIdSelector, cleanCartAction } from "../state/reducers/cartReducer/cartReducer.ts";
 
 export const requestHandlers = {
   signIn: async (username: string, password: string) => {
@@ -20,7 +20,7 @@ export const requestHandlers = {
       localStorage.setItem("refreshToken", data.refreshToken);
       data.userType = "limited";
       store.dispatch(setUser(data));
-      router.navigate("/checkout");
+      router.navigate(`/checkout/${cartIdSelector() || 1}`);
     } catch (error) {
       console.error(error);
       const errorMessage =
@@ -89,7 +89,7 @@ export const requestHandlers = {
   },
 
   checkout: () => {
-    router.navigate("/payment");
+    router.navigate(`/payment/${cartIdSelector() || 1}`);
   },
 
   payment: () => {
@@ -99,8 +99,6 @@ export const requestHandlers = {
 
   getUser: async () => {
     try {
-      console.log('func');
-      
       const response = await axios.get(`${ENV.BASE_URL}auth/user/me`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,

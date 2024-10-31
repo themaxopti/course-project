@@ -1,6 +1,7 @@
 import { createContainer } from "../../helpers/createHtmlTags";
 import { router } from "../../router/router";
 import {
+  cartIdSelector,
   cartProductsSelector,
   deleteProductAction,
 } from "../../state/reducers/cartReducer/cartReducer";
@@ -12,7 +13,7 @@ const checkoutButton = {
   buttonText: "Go to checkout",
   buttonAction: (e) => {
     e.preventDefault();
-    router.navigate("/checkout");
+    router.navigate(`/checkout/${cartIdSelector() || 1}`);
   },
 };
 
@@ -67,11 +68,9 @@ export class Cart {
           if (cartProductsSelector().length === 0) {
             setTimeout(async () => {
               router.navigate("/");
-              const res = await requestHandlers.deleteCart(
+              await requestHandlers.deleteCart(
                 store.getState().user.id || 1,
               );
-              console.log(res);
-              
             }, 1000);
           }
         });

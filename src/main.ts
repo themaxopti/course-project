@@ -5,7 +5,6 @@ import { requestHandlers } from "./utils/requestHandlers.ts";
 
 async function bootstrap() {
   const token = localStorage.getItem('accessToken');
-  console.log(token);
   
   if (token) {
     try {
