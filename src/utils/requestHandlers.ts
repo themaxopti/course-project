@@ -99,6 +99,8 @@ export const requestHandlers = {
 
   getUser: async () => {
     try {
+      console.log('func');
+      
       const response = await axios.get(`${ENV.BASE_URL}auth/user/me`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,

@@ -14,6 +14,8 @@ export class ProductDetailPage {
   productDetail: ProductDetail;
 
   constructor(productId: string) {
+    console.log('here');
+    
     this.children = [
       new Header(),
       new ProductDetail(),
