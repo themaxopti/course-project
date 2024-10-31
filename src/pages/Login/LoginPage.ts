@@ -11,9 +11,6 @@ export class LoginPage extends PageBaseClass {
     this.page.append(new Form(formOptions).render());
 
     this.userChanged();
-    store.subscribe(() => {
-      this.userChanged();
-    });
   }
 
   userChanged() {

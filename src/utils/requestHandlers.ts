@@ -1,5 +1,5 @@
 import { ENV } from "../../env.ts";
-import axios, { Axios, AxiosResponse } from "axios";
+import axios, { AxiosResponse } from "axios";
 import { store } from "../state/store.ts";
 import { setUser } from "../state/actions/user/userActions.ts";
 import { router } from "../router/router.ts";
@@ -7,8 +7,6 @@ import { Category } from "../components/main-categories/category-api.model.ts";
 import { createHTMLElement } from "./create-html-element.ts";
 import { ProductType } from "../types/requestHandlers.types.ts";
 import { cleanCartAction } from "../state/reducers/cartReducer/cartReducer.ts";
-
-const api = axios.create({ url: ENV.BASE_URL });
 
 export const requestHandlers = {
   signIn: async (username: string, password: string) => {
@@ -75,6 +73,7 @@ export const requestHandlers = {
   },
 
   getUser: async () => {
+    console.log("Getting user data");
     try {
       const response = await axios.get(`${ENV.BASE_URL}auth/user/me`, {
         headers: {
