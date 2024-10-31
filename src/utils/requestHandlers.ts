@@ -98,6 +98,7 @@ export const requestHandlers = {
   },
 
   getUser: async () => {
+    console.log("Getting user data");
     try {
       const response = await axios.get(`${ENV.BASE_URL}auth/user/me`, {
         headers: {

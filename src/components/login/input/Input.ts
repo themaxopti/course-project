@@ -58,6 +58,8 @@ export class Input {
         this.formatPhone();
       } else if (formatter === 'cardExpire') {
         this.formatCardExpire();
+      } else if (formatter === 'cardIban') {
+        this.formatCardIban();
       }
     });
   }
@@ -81,6 +83,16 @@ export class Input {
     this.realValue = value.replace("/", "");
   }
 
+  formatCardIban() {
+    let value = this.node.value.toUpperCase().trim();
+    let countryCode = value.slice(0, 2).replace(/[^A-Z]/g, "");
+    let numbers = value.slice(2).replace(/\D/g, "");
+    value = countryCode + numbers;
+    value = value.replace(/(.{4})/g, "$1 ").trim();
+    this.node.value = value;
+    this.realValue = value.replace(/\s/g, "");
+  }
+  
   formatPhone() {
     const value = this.node.value.replace(/\D/g, "").replace(/-/g, "");
     this.node.value = value.replace(/(\d{1,2})(\d{1,3})(\d{1,3})(\d{1,4})/, (_, p1, p2, p3, p4) => {
