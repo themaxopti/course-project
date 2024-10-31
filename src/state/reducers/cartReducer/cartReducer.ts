@@ -103,10 +103,13 @@ export const cartReducer = (
 export const cartProductsSelector = () => store.getState().cart.products;
 
 const total = (state: RootState) => {
-  const value = state.cart.products.reduce((acc, product) => {
+  let value = state.cart.products.reduce((acc, product) => {
     const discount = makeDiscount(product.price, product.discountPercentage);
     return acc + discount;
   }, 0);
+  if (store.getState().orderSummary.isSubscribed) {
+    value = value - value * 0.2;
+  }
   return Number(value.toFixed(2));
 };
 export const totalSelector = () => total(store.getState());
@@ -122,10 +125,6 @@ export const subTotalSelector = () => subTotal(store.getState());
 const discountPercent = (state: RootState) => {
   let totalValue = total(state);
   const subTotalValue = subTotal(state);
-
-  if (store.getState().orderSummary.isSubscribed) {
-    totalValue = totalValue - totalValue * 0.2;
-  }
 
   const discountValue = subTotalValue - totalValue;
   if (discountValue === 0) {
