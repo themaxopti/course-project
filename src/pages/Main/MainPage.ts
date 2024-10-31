@@ -8,7 +8,7 @@ export class MainPage extends PageBaseClass {
     super([
       new MainBanner().render(),
       new BrandsLine().render(),
-      new MainCategories().render()
+      new MainCategories().render(),
     ]);
     this.page.classList.add("main-page");
   }

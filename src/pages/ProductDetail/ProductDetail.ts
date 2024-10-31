@@ -1,43 +1,33 @@
 import { Footer } from "../../components/Footer";
 import { Header } from "../../components/Header";
-import { Navigation } from "../../components/Navigation/Navigation";
-import { OrderConfirmation } from "../../components/order-confirmation/order-confirmation";
 import { ProductDetail } from "../../components/product-detail/ProductDetail";
-import {
-  getProduct,
-} from "../../state/reducers/productReducer/productReducer";
+import { getProduct } from "../../state/reducers/productReducer/productReducer";
 import { store } from "../../state/store";
 
 export class ProductDetailPage {
   element: HTMLDivElement | null = null;
-  children: [Header, Navigation, ProductDetail, Footer];
-  productDetail: ProductDetail;
+  children: [Header, ProductDetail, Footer];
 
   constructor(productId: string) {
-    this.children = [
-      new Header(),
-      new ProductDetail(),
-      new Footer(),
-    ] as any;
+    this.children = [new Header(), new ProductDetail(), new Footer()];
 
     store.dispatch(getProduct(productId));
   }
 
   destroy() {
-    this.children.forEach(child => {
-      if (child.hasOwnProperty('unsubscribe')){
-        // @ts-ignore
-        child.unsubscribe()
+    this.children.forEach((child) => {
+      if (child instanceof ProductDetail) {
+        child.unsubscribe();
       }
-    })
+    });
     if (this.element) {
-      this.element.remove()
+      this.element.remove();
       this.element = null;
     }
   }
 
   render() {
-    this.element = document.createElement('div');
+    this.element = document.createElement("div");
 
     this.children.forEach((child) => {
       this.element.appendChild(child.render());

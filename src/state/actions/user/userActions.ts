@@ -4,9 +4,3 @@ export function setUser(user: any) {
     payload: user,
   };
 }
-
-export function clearUser() {
-    return {
-        type: 'CLEAR_USER',
-    };
-}

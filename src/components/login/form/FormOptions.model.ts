@@ -4,9 +4,9 @@ export interface FormOptionsModel {
   title?: string;
   fields: FormFieldModel[];
   submit?: {
-    textContent?: string,
-    handlerName?: string,
-    sendId?: string[],
+    textContent?: string;
+    handlerName?: string;
+    sendId?: string[];
   };
 }
 

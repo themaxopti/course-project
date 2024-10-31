@@ -1,8 +1,8 @@
 // vite.config.js
-import { defineConfig } from 'vite';
+import { defineConfig } from "vite";
 
 export default defineConfig({
   build: {
-    target: 'esnext' // или 'modules' для широкого охвата современных браузеров
-  }
+    target: "esnext", // или 'modules' для широкого охвата современных браузеров
+  },
 });

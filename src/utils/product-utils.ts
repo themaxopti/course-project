@@ -1,12 +1,17 @@
 export function calculatePercentage(max: number, min: number) {
   if (min > max) {
-    throw new Error("The smaller number cannot be greater than the larger number.");
+    throw new Error(
+      "The smaller number cannot be greater than the larger number."
+    );
   }
 
   return (min / max) * 100;
 }
 
-export function calculateValueFromPercentage(number: number, percentage: number) {
+export function calculateValueFromPercentage(
+  number: number,
+  percentage: number
+) {
   if (percentage < 0 || percentage > 100) {
     throw new Error("Percentage must be between 0 and 100.");
   }

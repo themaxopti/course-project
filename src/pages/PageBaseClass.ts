@@ -4,9 +4,7 @@ import { Footer } from "../components/Footer.ts";
 export class PageBaseClass {
   page: HTMLElement;
 
-  constructor(
-    pageContent: HTMLElement[] | DocumentFragment[]
-  ) {
+  constructor(pageContent: HTMLElement[] | DocumentFragment[]) {
     this.page = document.createElement("main");
     this.page.append(...pageContent);
   }

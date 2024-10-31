@@ -8,7 +8,6 @@ export class NotFoundPage extends PageBaseClass {
     super([document.createElement("main")]);
     const container = createDiv("", "container");
 
-
     container.innerHTML = "<br /> This page does not exist";
     this.page.append(container);
   }

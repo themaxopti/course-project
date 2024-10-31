@@ -16,7 +16,7 @@ export class OrderConfirmationPage extends PageBaseClass {
     this.children = [
       new Navigation(["order-confirmation"]),
       new OrderConfirmation(),
-    ] as any;
+    ];
 
     this.timeout = setTimeout(() => {
       router.navigate("/");

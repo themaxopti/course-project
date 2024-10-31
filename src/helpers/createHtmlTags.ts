@@ -9,14 +9,17 @@ export function createDiv(html: string = "", classes?: string) {
   return div;
 }
 
-export function createContainer(html: string, classes: string[] = []): HTMLDivElement {
+export function createContainer(
+  html: string,
+  classes: string[] = []
+): HTMLDivElement {
   const wrapper = document.createElement("div");
   wrapper.classList.add("wrapper");
 
   const container = document.createElement("div");
   container.innerHTML = html;
   container.classList.add(`container`);
-  classes.forEach(containerClass =>  container.classList.add(containerClass))
+  classes.forEach((containerClass) => container.classList.add(containerClass));
 
   wrapper.appendChild(container);
 
