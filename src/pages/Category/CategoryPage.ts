@@ -12,7 +12,6 @@ const BASE_URL_CATEGORY: string = 'https://dummyjson.com/products/category/';
 export class CategoryPage extends PageBaseClass {
   categoryName: string;
   brands: string[] = [];
-  categoryData: Product[];
   cardsBlock: HTMLElement;
   categoryPageContainer: HTMLElement;
 
@@ -89,7 +88,7 @@ export class CategoryPage extends PageBaseClass {
     filtersContainer.prepend(filterPanel.render());
   }
 
-  // @ts-ignore
+  // @ts-expect-error: render in base class is not async, only one async case
   async render() {
     this.appendHeaderAndFooter();
     await this.renderCards();

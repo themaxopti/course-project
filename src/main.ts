@@ -9,7 +9,7 @@ async function bootstrap() {
     try {
       await requestHandlers.getUser();
       router.resolve();
-    } catch (error) {
+    } catch {
       router.resolve();
     }
   } else {

@@ -14,7 +14,7 @@ export class CartPage {
       new Navigation(["cart"]),
       new Cart(),
       new Footer(),
-    ] as any;
+    ];
   }
 
   render() {

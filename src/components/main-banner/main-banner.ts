@@ -1,5 +1,4 @@
 import { createHTMLElement } from "../../utils/create-html-element";
-// @ts-ignore
 import ImgBannerDesktop from '../../assets/banner-desktop1.png';
 import { CtaBanner } from "./cta-banner/cta-banner";
 

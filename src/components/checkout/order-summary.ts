@@ -1,5 +1,4 @@
 import { store } from "../../state/store.ts";
-// @ts-ignore
 import ButtonArrow from "../../assets/payment/button-arrow.svg";
 import { discountPercentSelector, discountValueSelector, subTotalSelector, totalSelector } from "../../state/reducers/cartReducer/cartReducer.ts";
 

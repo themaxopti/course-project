@@ -58,7 +58,7 @@ export class Form {
         return input.realValue || input.node.value;
       });
       await requestHandlers[submit.handlerName](...values);
-    } catch (error: any) {
+    } catch (error) {
       this.setFormError(error.message);
     }
   }
@@ -87,7 +87,7 @@ export class Form {
     if (this.validateFields()) {
       try {
         await this.sendForm(submit);
-      } catch (error: any) {
+      } catch (error) {
         this.setFormError(error.message);
       }
     }

@@ -1,4 +1,3 @@
-import { createSelector } from "reselect";
 import { ProductType } from "../../../types/requestHandlers.types";
 import { requestHandlers } from "../../../utils/requestHandlers";
 import { RootState, store } from "../../store";
@@ -76,7 +75,7 @@ export function getProduct(id: number | string) {
       const response = await requestHandlers.getProduct(id);
       dispatch(setProductAction(response.data));
       dispatch(setProductLoadingAction(false));
-    } catch (error) {
+    } catch {
       dispatch(setProductLoadingAction(false));
       dispatch(setIsProductExist(false));
     }

@@ -4,12 +4,7 @@ import arrowSwg from '../../assets/navigation/arrow.svg'
 
 export class Navigation {
   element: HTMLDivElement | null = null;
-  children: any[];
   routes: string[];
-  routeTitles = {
-    ["order-confirmation"]: "Order Confirmation",
-    ["product-detail"]: "Product",
-  };
 
   constructor(paths?: string[]) {
     if (!paths) {
