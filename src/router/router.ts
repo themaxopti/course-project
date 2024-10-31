@@ -37,8 +37,6 @@ router.on("/", function () {
 });
 
 router.on("/test", function (params) {
-  console.log(params);
-  
   const testPage = new TestPage();
   document.querySelector("#root")!.innerHTML = "";
   document.querySelector("#root")?.append(testPage.render());
@@ -62,13 +60,13 @@ router.on("/product/:id", function (params) {
   document.querySelector("#root")?.append(productDetailPage.render());
 });
 
-router.on("/checkout", function () {
+router.on("/checkout/:cartId", function () {
   const checkoutPage = new CheckoutPage();
   document.querySelector("#root")!.innerHTML = "";
   document.querySelector("#root")?.append(checkoutPage.render());
 });
 
-router.on("/payment", function () {
+router.on("/payment/:cartId", function () {
   const paymentPage = new PaymentPage();
   document.querySelector("#root")!.innerHTML = "";
   document.querySelector("#root")?.append(paymentPage.render());

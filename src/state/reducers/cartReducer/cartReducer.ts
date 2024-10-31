@@ -10,6 +10,7 @@ import {
 export interface InitialState {
   products: ProductType[] | null;
   isLoading: boolean;
+  id: number;
 }
 
 type ActionType =
@@ -63,6 +64,7 @@ export const cleanCartAction = () => {
 const initialState: InitialState = {
   products: [],
   isLoading: true,
+  id: 1,
 };
 
 export const cartReducer = (
@@ -157,3 +159,5 @@ export function makeManyProducts(count: number): ProductType[] {
 
   return products;
 }
+
+export const cartIdSelector = () => store.getState().cart.id;
