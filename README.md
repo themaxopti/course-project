@@ -11,7 +11,7 @@ This application supports design for desktop and mobile devices.
 
 **How to launch locally?** Steps whic you need to copy and past into your code-editor command-line:
    
-1. `https://github.com/School-of-Digital-Competencies/js-ts-webdev-tasks.git`
+1. `git clone https://github.com/themaxopti/course-project.git`
 
 2. `npm install`
 
